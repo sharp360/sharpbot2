@@ -79,4 +79,8 @@ async def megadice(ctx):
                  '96','97','98','99','100']
     await ctx.send(random.choice(responsus))
 
-client.run(os.environ['BOT_TOKEN'])
+token =  os.environ.get('BOT_TOKEN')
+
+bot.run(str(token))
+
+##client.run(os.environ['BOT_TOKEN'])
