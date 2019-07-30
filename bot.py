@@ -8,6 +8,7 @@ import time
 import random
 from discord import Game
 import os
+from intertools import cycle
 
 client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
