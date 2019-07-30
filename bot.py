@@ -11,7 +11,7 @@ import os
 
 client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
-status = cycle(['Шо бы сюда написатб'])
+status = cycle(["5 point punch, dont hold me back,We see through, you like its glass,All you niggas, fucking trash,Youre not a god, or devil, noQuiver with fear, when you step on the server,They gon force, me to loses my control,Niggas aint ready, to peek that angle, what,Fuck this whole scene, man we taking shit over,Ive been doing business, Ive been with the skeeters,Its too late for, niggas the dead line is closer,The world has been, dont you see im the hvh king, yah,We on that ultra, light baim, yah,We bout that money, and fame, yah,I fuck you bitch to ,my beats, yah,I like the way ,that he screams, yah"])
 
 @client.event
 async def on_ready():
@@ -79,13 +79,6 @@ async def megadice(ctx):
                  '65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95',
                  '96','97','98','99','100']
     await ctx.send(random.choice(responsus))
-
-@client.command(pass_context=True)
-async def join(ctx):
-    channel = ctx.message.author.voice.channel
-    if ctx.voice_client is not None:
-        return await ctx.voice_client.move_to(channel)
-    await channel.connect()
 
 client.run(os.environ['BOT_TOKEN'])
 
