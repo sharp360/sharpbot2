@@ -13,6 +13,7 @@ import youtube_dl
 import pickle
 import os
 
+TOKEN = 'NDY2MzA1OTY0NTA1Njk0MjE5.XUAdOA.EDK4A5Cz5_kNG3Beb_WYwtTIRG4'
 client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
 status = cycle(['Шо бы сюда написатб'])
@@ -81,6 +82,6 @@ async def megadice(ctx):
 
 token =  os.environ.get('BOT_TOKEN')
 
-bot.run(str(token))
+client.run(TOKEN)
 
 ##client.run(os.environ['BOT_TOKEN'])
