@@ -2,18 +2,13 @@ import asyncio
 import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
-from discord.voice_client import VoiceClient
 from discord.ext import commands, tasks
 from itertools import cycle
-from discord.voice_client import VoiceClient
 import time
 import random
 from discord import Game
-import youtube_dl
-import pickle
 import os
 
-TOKEN = 'NDY2MzA1OTY0NTA1Njk0MjE5.XUAdOA.EDK4A5Cz5_kNG3Beb_WYwtTIRG4'
 client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
 status = cycle(['Шо бы сюда написатб'])
@@ -80,8 +75,6 @@ async def megadice(ctx):
                  '96','97','98','99','100']
     await ctx.send(random.choice(responsus))
 
-token =  os.environ.get('BOT_TOKEN')
-
-client.run(TOKEN)
+client.run(os.environ['BOT_TOKEN'])
 
 ##client.run(os.environ['BOT_TOKEN'])
