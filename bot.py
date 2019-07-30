@@ -11,7 +11,7 @@ import os
 
 client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
-status = cycle(["5 point punch, dont hold me back,We see through, you like its glass,All you niggas, fucking trash,Youre not a god, or devil, noQuiver with fear, when you step on the server,They gon force, me to loses my control,Niggas aint ready, to peek that angle, what,Fuck this whole scene, man we taking shit over,Ive been doing business, Ive been with the skeeters,Its too late for, niggas the dead line is closer,The world has been, dont you see im the hvh king, yah,We on that ultra, light baim, yah,We bout that money, and fame, yah,I fuck you bitch to ,my beats, yah,I like the way ,that he screams, yah"])
+status = cycle(["saasdadasdsaf, 133, 31231, 1312"])
 
 @client.event
 async def on_ready():
