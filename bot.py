@@ -80,6 +80,17 @@ async def megadice(ctx):
                  '96','97','98','99','100']
     await ctx.send(random.choice(responsus))
 
+@client.command(pass_context=True)
+async def join(ctx):
+    channel = ctx.message.author.voice.channel
+    if ctx.voice_client is not None:
+        return await ctx.voice_client.move_to(channel)
+    await channel.connect()
+
+@client.command(pass_context=True)
+async def leave(ctx):
+    await ctx.voice_client.disconnect()
+
 client.run(os.environ['BOT_TOKEN'])
 
 ##client.run(os.environ['BOT_TOKEN'])
