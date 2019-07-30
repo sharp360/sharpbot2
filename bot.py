@@ -87,10 +87,6 @@ async def join(ctx):
         return await ctx.voice_client.move_to(channel)
     await channel.connect()
 
-@client.command(pass_context=True)
-async def leave(ctx):
-    await ctx.voice_client.disconnect()
-
 client.run(os.environ['BOT_TOKEN'])
 
 ##client.run(os.environ['BOT_TOKEN'])
