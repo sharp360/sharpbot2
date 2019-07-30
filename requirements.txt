@@ -1,6 +1,5 @@
 discord.py
 aiohttp
 wesockets
-chardet
 random
 asyncio
