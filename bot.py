@@ -8,11 +8,10 @@ import time
 import random
 from discord import Game
 import os
-from intertools import cycle
 
 client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
-status = cycle(["1, 2, 3, 4, 5, 6, 7, 8, 9,"])
+status = cycle(["1, 2, 3, 4, 5, 6, 7, 8,"])
 
 @client.event
 async def on_ready():
