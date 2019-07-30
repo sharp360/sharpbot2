@@ -13,7 +13,6 @@ import youtube_dl
 import pickle
 import os
 
-token = os.environ.get('BOT_TOKEN')
 client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
 status = cycle(['Шо бы сюда написатб'])
@@ -80,13 +79,6 @@ async def megadice(ctx):
                  '96','97','98','99','100']
     await ctx.send(random.choice(responsus))
 
-@commands.command(name='join', invoke_without_subcommand=True)
-async def join(self, ctx: commands.Context):
-        """Joins a voice channel."""
+token = os.environ.get('BOT_TOKEN')
 
-        destination = ctx.author.voice.channel
-        if ctx.voice_state.voice:
-            await ctx.voice_state.voice.move_to(destination)
-            return
-
-        ctx.voice_state.voice = await destination.connect()
+bot.run(str(token))
