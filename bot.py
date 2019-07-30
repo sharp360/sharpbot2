@@ -24,7 +24,12 @@ async def chang_status():
 
 @client.command()
 async def help(ctx):
-    await ctx.send("Доступные команды: /clear, /зачистка, /kick (Ник), /ban (Ник), /dice, /megadice")
+    await ctx.send("Доступные команды: /clear, /зачистка, /kick (Ник), /ban (Ник), /dice, /megadice, /invite - Пригласить бота на сервер")
+
+@client.command()
+async def invite(ctx):
+    await ctx.send("https://discordapp.com/api/oauth2/authorize?client_id=466305964505694219&permissions=8&redirect_uri=https%3A%2F%2Fyt3.ggpht.com%2FmRxl63ZDX720dtuof0iEn2Uyctkl_4NNhOrp3qpYk-yp7_mOlSHC-Oa-UtwKyTUuSStAxO3Do11eQw%3Ds480-nd-rwa&scope=bot")
+
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
