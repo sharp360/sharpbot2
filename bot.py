@@ -24,7 +24,7 @@ async def chang_status():
 
 @client.command()
 async def help(ctx):
-    await ctx.send("Доступные команды: /clear, /зачистка, /kick (Ник), /ban (Ник), /dice, /megadice, /invite - Пригласить бота на сервер, /ping - Пинг бота. Наверное")
+    await ctx.send("Доступные команды: /clear, /зачистка - Как /clear, только удаляет 100 сообщений, /kick (Ник#0000), /ban (Ник#0000), /unban (Ник#0000) /dice - Рандомное число от 1 до 6, /megadice - Рандомное число от 1 до 100, /coinflip - Орел и решка, /invite - Пригласить бота на сервер, /ping - Пинг бота. Наверное")
 
 @client.command()
 async def invite(ctx):
@@ -97,6 +97,11 @@ async def megadice(ctx):
                  '65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95',
                  '96','97','98','99','100']
     await ctx.send(random.choice(responsus))
+
+@client.command()
+async def coinflip(ctx):
+    coin = ['Орел','Решка']
+    await ctx.send(random.choice(coin))
 
 client.run(os.environ['BOT_TOKEN'])
 
