@@ -49,6 +49,10 @@ async def ping(ctx):
     latency = client.latency
     await ctx.send(latency)
 
+@client.event
+async def on_message(message):
+    print("The message's content was", message.content)
+
 @client.command()
 @commands.has_permissions(manage_messages=True)
 async def зачистка(ctx):
