@@ -11,7 +11,7 @@ import os
 
 client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
-status = cycle(['aaaaaa'])
+status = cycle(['Команды /help'])
 
 @client.event
 async def on_ready():
@@ -48,11 +48,6 @@ async def clear(ctx, ammount=6):
 async def ping(ctx):
     latency = client.latency
     await ctx.send(latency)
-
-@client.event
-async def on_member_join(member):
-    print("Добро пожаловать в таверну" + member.name +".")
-
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
