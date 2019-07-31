@@ -50,8 +50,9 @@ async def ping(ctx):
     await ctx.send(latency)
 
 @client.event
-async def on_message(message):
-    print("The message's content was", message.content)
+async def on_member_join(member):
+    print("Добро пожаловать в таверну" + member.name +".")
+
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
