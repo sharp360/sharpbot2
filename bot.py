@@ -35,7 +35,7 @@ async def invite(ctx):
 async def clear(ctx, ammount=6):
     await ctx.channel.purge(limit=ammount)
     embed = discord.Embed(
-        title='Удалено +ammount+ сообщений',
+        title='Сообщение удалено',
         colour=discord.Colour.green()
     )
     
@@ -65,11 +65,25 @@ async def зачистка(ctx):
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
+    await ctx.send(f'{member.mention} Был кикнут')
 
 @client.command()
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason=reason)
+    await ctx.send(f'{member.mention} Отправился на банановые острова')
+
+@client.command()
+async def unban(ctx, *, member):
+    banned_users = await ctx.guild.bans()
+    member_name, member_discriminator = member.split('#')
+
+    for ban_entry in banned_users:
+        user = ban_entry.user
+
+        if (user.name, user.discriminator) == (member_name, member_discriminator):
+            await ctx.guild.unban(user)
+            await ctx.send(f'{user.mention} Вернулся с банановых островов')
 
 @client.command()
 async def dice(ctx):
