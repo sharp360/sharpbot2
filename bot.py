@@ -24,7 +24,7 @@ async def chang_status():
 
 @client.command()
 async def help(ctx):
-    await ctx.send("Доступные команды: /clear, /зачистка, /kick (Ник), /ban (Ник), /dice, /megadice, /invite - Пригласить бота на сервер")
+    await ctx.send("Доступные команды: /clear, /зачистка, /kick (Ник), /ban (Ник), /dice, /megadice, /invite - Пригласить бота на сервер, /ping - Пинг бота. Наверное")
 
 @client.command()
 async def invite(ctx):
@@ -46,13 +46,7 @@ async def clear(ctx, ammount=6):
 
 @client.command()
 async def ping(ctx):
-    '''
-    This text will be shown in the help command
-    '''
-
-    # Get the latency of the bot
-    latency = client.latency  # Included in the Discord.py library
-    # Send it to the user
+    latency = client.latency
     await ctx.send(latency)
 
 @client.command()
