@@ -30,17 +30,12 @@ async def help(ctx):
 async def invite(ctx):
     await ctx.send("https://bit.ly/2K6B5t4")
 
-@client.event
-async def on_member_join(member):
-    channel = member.guild.text_channels[0]
-    await channel.send('Welcome!')
-
 @client.command()
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, ammount=6):
     await ctx.channel.purge(limit=ammount)
     embed = discord.Embed(
-        title='Сообщение удалено',
+        title='Удалено +ammount+ сообщений',
         colour=discord.Colour.green()
     )
     
