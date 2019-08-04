@@ -106,7 +106,7 @@ async def coinflip(ctx):
 def check_if_it_is_me(ctx):
     return ctx.message.author.id == 203634439673217024
 
-@client.command()
+@bot.command()
 @commands.check(check_if_it_is_me)
 async def only_for_me(ctx):
     await ctx.send('Я знаю тебя!') 
