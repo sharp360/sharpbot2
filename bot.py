@@ -90,12 +90,16 @@ async def зачистка(ctx):
 @client.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
-    await member.kick(reason=reason)
-    await ctx.send(f'{member.mention} Подсрачником отправлен в Украину')
     if not member:
         mkick = discord.Embed(title='Error', description='You must specify a member!', color=0xFF0000)
         mkick.set_author(name=f'{ctx.message.author.display_name}', icon_url=f'{ctx.message.author.avatar_url}')
         return await ctx.send(embed=mkick)
+    if not reason:
+        rkick = discord.Embed(title='Error', description='You must specify a reason!', color=0xFF0000)
+        rkick.set_author(name=f'{ctx.message.author.display_name}', icon_url=f'{ctx.message.author.avatar_url}')
+        return await ctx.send(embed=rkick)
+    await member.kick(reason=reason)
+    await ctx.send(f'{member.mention} Подсрачником отправлен в Украину')
 
 @client.command()
 @commands.has_permissions(ban_members=True)
