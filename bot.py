@@ -52,6 +52,17 @@ async def chang_status():
 async def help(ctx):
     await ctx.send("Доступные команды: /clear, /зачистка - Как /clear, только удаляет 100 сообщений, /kick (Ник#0000), /ban (Ник#0000), /unban (Ник#0000) /dice - Рандомное число от 1 до 6, /megadice - Рандомное число от 1 до 100, /coinflip - Орел и решка, /invite - Пригласить бота на сервер, /ping - Пинг бота. Наверное")
 
+@client.command(pass_context=True)
+async def say(ctx, *, text: str=None):
+    '''Make the bot say something'''
+    if ctx.message.author.id == 203634439673217024:
+        await ctx.message.delete()
+        return await ctx.send(text)
+    else:
+        embed = discord.Embed(title='Error', description=f'Our mighty lord and saviour Phil Swift is not upon us.', color=0xFF0000)
+        embed.set_author(name=f'{ctx.message.author.display_name}', icon_url=f'{ctx.message.author.avatar_url}')
+        return await ctx.send(embed=embed)
+
 @client.command()
 async def invite(ctx):
     await ctx.send("https://bit.ly/2K6B5t4")
