@@ -1,6 +1,5 @@
 import asyncio
 import discord
-import datetime
 from discord.ext.commands import Bot
 from discord.ext import commands
 from discord.ext import commands, tasks
@@ -88,33 +87,11 @@ async def зачистка(ctx):
 
     await ctx.send(embed=embed)
 
-@client.command(pass_context=True, aliases=['k'])
+@client.command()
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, member : discord.Member=None, *, reason=None):
-    '''Kick someone.\nUsage: !kick <member> [reason]\nAliases: !k\nPermissions: Kick Members'''
-    if not member:
-        mkick = discord.Embed(title='Error', description='You must specify a member!', color=0xFF0000)
-        mkick.set_author(name=f'{ctx.message.author.display_name}', icon_url=f'{ctx.message.author.avatar_url}')
-        return await ctx.send(embed=mkick)
-    if not reason:
-        rkick = discord.Embed(title='Error', description='You must specify a reason!', color=0xFF0000)
-        rkick.set_author(name=f'{ctx.message.author.display_name}', icon_url=f'{ctx.message.author.avatar_url}')
-        return await ctx.send(embed=rkick)
-    try:
-        await member.kick(reason=reason)
-    except Exception as e:
-        if 'Privilege is too low' in str(e):
-            ekick = discord.Embed(title='Error', description='The person you are trying to kick has high permissions.', color=0xFF0000)
-            ekick.set_author(name=f'{ctx.message.author.display_name}', icon_url=f'{ctx.message.author.avatar_url}')
-            return await ctx.send(embed=ekick)
-        else:
-            await ctx.send(e)
-    skick = discord.Embed(title='Kick', description=f'{ctx.message.author.mention} has kicked {member.name}\n{reason}', color=0x00FF00)
-    skick.set_author(name=f'{ctx.message.author.display_name}', icon_url=f'{ctx.message.author.avatar_url}')
-    await ctx.send(embed=skick)
-    message = discord.Embed(title='Kick', description=f'{ctx.message.author.mention} has kicked you from {ctx.guild.name}\n{reason}', color=0xFF0000,timestamp = datetime.datetime.utcnow())
-    message.set_author(name=f'{ctx.message.author.display_name}', icon_url=f'{ctx.message.author.avatar_url}')
-    return await member.send(embed=message)
+async def kick(ctx, member : discord.Member, *, reason=None):
+    await member.kick(reason=reason)
+    await ctx.send(f'{member.mention} Подсрачником отправлен в Украину')
 
 @client.command()
 @commands.has_permissions(ban_members=True)
