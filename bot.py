@@ -3,6 +3,8 @@ import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
 from discord.ext import commands, tasks
+from discord import Member
+from discord.ext.commands import has_permissions, MissingPermissions
 from itertools import cycle
 import time
 import random
@@ -89,7 +91,11 @@ async def зачистка(ctx):
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
-    await ctx.send(f'{member.mention} Подстрачником отправлен в Украину')
+    await ctx.send(f'{member.mention} Подсрачником отправлен в Украину')
+    if not member:
+        mkick = discord.Embed(title='Error', description='You must specify a member!', color=0xFF0000)
+        mkick.set_author(name=f'{ctx.message.author.display_name}', icon_url=f'{ctx.message.author.avatar_url}')
+        return await ctx.send(embed=mkick)
 
 @client.command()
 @commands.has_permissions(ban_members=True)
