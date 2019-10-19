@@ -15,30 +15,6 @@ client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
 status = cycle(['Команды /help'])
 
-@client.command()
-async def load(ctx, extension):
-    client.load_extension(f'cogs.{extension}')
-    ctx.send('Cog Загружен, а Cat лох')
-
-@client.command()
-async def unload(ctx, extension):
-    client.unload_extension(f'cogs.{extension}')
-    ctx.send('Cog Выгружен, а Cat лох')
-
-for filename in os.listdir('./cogs'):
-    if filename.endswith('.py'):
-        client.load_extension(f'cogs.{filename[:-3]}')
-
-#Для импортарования кога
-#class Sharp(commands.Cog):
-#
-#   def __init__(self, client):
-#      self.client = client
-#
-#def setup(client):
-#    client.add_cog(Sharp(client))
-
-
 @client.event
 async def on_ready():
     chang_status.start()
