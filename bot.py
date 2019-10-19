@@ -3,6 +3,7 @@ import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
 from discord.ext import commands, tasks
+from discord.ext.commands import Bot
 from discord import Member
 from discord.ext.commands import has_permissions, MissingPermissions
 from itertools import cycle
@@ -39,6 +40,12 @@ async def clear(ctx, amount: int):
     embed.set_image(url='https://media.discordapp.net/attachments/407989900881952771/591420060778758155/6hnrd75g2g531.gif')
 
     await ctx.send(embed=embed)
+
+@client.command(pass_context=True)
+async def join(ctx):
+    author = ctx.message.author
+    channel = author.voice_channel
+    await ctx.join_voice_channel(channel)
 
 @client.command()
 async def ping(ctx):
