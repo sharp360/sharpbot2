@@ -36,23 +36,9 @@ async def clear(ctx, amount: int):
         colour=discord.Colour.green()
     )
   
-    embed.set_image(url='https://cdn.discordapp.com/attachments/447540683574738952/588744831539347468/me_irl.gif')
+    embed.set_image(url='https://media.discordapp.net/attachments/407989900881952771/591420060778758155/6hnrd75g2g531.gif')
 
     await ctx.send(embed=embed)
-
-
-#`@client.command()
-#@commands.has_permissions(manage_messages=True)
-#async def clear(ctx, ammount=6):
-#    await ctx.channel.purge(limit=ammount)
-#    embed = discord.Embed(
-#        title='Сообщение удалено',
-#        colour=discord.Colour.green()
-#    )
-#  
-#    embed.set_image(url='https://cdn.discordapp.com/attachments/447540683574738952/588744831539347468/me_irl.gif')
-#
-#   await ctx.send(embed=embed)
 
 @client.command()
 async def ping(ctx):
