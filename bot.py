@@ -13,19 +13,14 @@ import os
 
 client = commands.Bot(command_prefix = '/')
 client.remove_command('help')
-status = cycle(['Команды /help'])
 
 @client.event
 async def on_ready():
-    chang_status.start()
+    await client.change_presence(status=discord.Status.idle, activity=discord.Game('Команды /help'))
     print('Ебать работает')
 
-@tasks.loop(seconds=0.5)
-async def chang_status():
-    await client.change_presence(activity=discord.Game(next(status)))
-
 @client.command()
-async def sstatus(ctx):
+async def status(ctx):
     await ctx.send("1.2")
 
 @client.command()
