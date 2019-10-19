@@ -50,7 +50,7 @@ async def chang_status():
 
 @client.command()
 async def sstatus(ctx):
-    await ctx.send("1.1")
+    await ctx.send("1.2")
 
 @client.command()
 async def help(ctx):
