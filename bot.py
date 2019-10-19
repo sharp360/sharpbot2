@@ -30,7 +30,7 @@ async def invite(ctx):
 @client.command()
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount: int):
-    deleted = await ctx.channel.purge(limit=50)
+    deleted = await ctx.channel.purge(limit=amount)
     embed = discord.Embed(
         title=(f"Удалено {len(deleted)} сообщений"),
         colour=discord.Colour.green()
