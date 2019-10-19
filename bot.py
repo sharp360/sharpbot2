@@ -50,17 +50,11 @@ async def chang_status():
 
 @client.command()
 async def sstatus(ctx):
-    await ctx.send("1.2")
+    await ctx.send("1.2 ")
 
 @client.command()
 async def help(ctx):
     await ctx.send("Доступные команды: /clear, /зачистка - Как /clear, только удаляет 100 сообщений, /kick (Ник#0000), /ban (Ник#0000), /unban (Ник#0000) /dice - Рандомное число от 1 до 6, /megadice - Рандомное число от 1 до 100, /coinflip - Орел и решка, /invite - Пригласить бота на сервер, /ping - Пинг бота. Наверное")
-
-@client.command(pass_context=True)
-async def say(ctx, *, text: str=None):
-    if ctx.message.author.id == 203634439673217024:
-        await ctx.message.delete()
-        return await ctx.send(text)
 
 @client.command()
 async def invite(ctx):
@@ -144,10 +138,6 @@ async def megadice(ctx):
 async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
-
-@client.command()
-async def rhunt(ctx):
-    await ctx.send("rpg hunt")
 
 client.run(os.environ['BOT_TOKEN'])
 
