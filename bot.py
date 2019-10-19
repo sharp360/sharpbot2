@@ -139,6 +139,10 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
+@client.command()
+async def rhunt(ctx):
+    await ctx.send("rpg hunt")
+
 client.run(os.environ['BOT_TOKEN'])
 
 ##client.run(os.environ['BOT_TOKEN'])
