@@ -31,7 +31,15 @@ async def invite(ctx):
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount: int):
     deleted = await ctx.channel.purge(limit=amount)
-    await ctx.send(f"Удалено {len(deleted)} сообщений")
+    embed = discord.Embed(
+        title=(f"Удалено {len(deleted)} сообщений"),
+        colour=discord.Colour.green()
+    )
+  
+    embed.set_image(url='https://cdn.discordapp.com/attachments/447540683574738952/588744831539347468/me_irl.gif')
+
+    await ctx.send(embed=embed)
+
 
 #`@client.command()
 #@commands.has_permissions(manage_messages=True)
