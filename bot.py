@@ -16,7 +16,7 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.idle, activity=discord.Game('Команды /help'))
+    await client.change_presence(status=discord.Status, activity=discord.Game('Команды /help'))
     print('Ебать работает')
 
 @client.command()
