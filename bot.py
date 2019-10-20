@@ -3,7 +3,6 @@ import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
 from discord.ext import commands, tasks
-from discord.ext.commands import Bot
 from discord import Member
 from discord.ext.commands import has_permissions, MissingPermissions
 from itertools import cycle
@@ -13,6 +12,7 @@ from discord import Game
 import os
 
 client = commands.Bot(command_prefix = '/')
+bot = commands.Bot(command_prefix = '/')
 client.remove_command('help')
 
 @client.event
@@ -41,11 +41,9 @@ async def clear(ctx, amount: int):
 
     await ctx.send(embed=embed)
 
-@client.command(pass_context=True)
-async def join(ctx):
-    author = ctx.message.author
-    channel = author.voice_channel
-    await ctx.join_voice_channel(channel)
+@bot.command()
+async def say(ctx, *, arg):
+    await ctx.send(arg)
 
 @client.command()
 async def ping(ctx):
@@ -106,7 +104,5 @@ async def megadice(ctx):
 async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
-
-client.run(os.environ['BOT_TOKEN'])
 
 client.run(os.environ['BOT_TOKEN'])
