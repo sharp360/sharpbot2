@@ -41,10 +41,6 @@ async def clear(ctx, amount: int):
 
     await ctx.send(embed=embed)
 
-@bot.command()
-async def say(ctx, *, arg):
-    await ctx.send(arg)
-
 @client.command()
 async def ping(ctx):
     latency = client.latency
