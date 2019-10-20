@@ -37,7 +37,7 @@ async def clear(ctx, amount: int):
         colour=discord.Colour.green()
     )
   
-    embed.set_image(url='https://media.discordapp.net/attachments/407989900881952771/591420060778758155/6hnrd75g2g531.gif')
+    embed.set_image(url='https://cdn.discordapp.com/attachments/624937083605352469/635196301780320271/Dz-A-4aQgiY.jpg')
 
     await ctx.send(embed=embed)
 
@@ -100,5 +100,6 @@ async def megadice(ctx):
 async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
+     
 
 client.run(os.environ['BOT_TOKEN'])
