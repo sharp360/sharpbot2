@@ -34,7 +34,7 @@ async def clear(ctx, amount: int):
     deleted = await ctx.channel.purge(limit=amount)
     embed = discord.Embed(
         title=(f"Удалено {len(deleted)} сообщений"),
-        colour=discord.Colour.green()
+        colour=discord.Colour.purple()
     )
   
     embed.set_image(url='https://cdn.discordapp.com/attachments/624937083605352469/635196301780320271/Dz-A-4aQgiY.jpg')
@@ -52,7 +52,7 @@ async def зачистка(ctx):
     await ctx.channel.purge(limit=100)
     embed = discord.Embed(
         title='Произошла зОчистка',
-        colour=discord.Colour.green()
+        colour=discord.Colour.purple()
     )
     
     embed.set_image(url='https://cdn.discordapp.com/attachments/447540683574738952/589700786338922509/image0-11-1.jpg')
@@ -101,22 +101,9 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
-@commands.command(pass_context=True)
-async def role(self, ctx, *, role: discord.Role = None):
-    if role is None:
-        return await self.bot.say("You haven't specified a role! ")
+@bot.command()
+async def joined(ctx, member : discord.Member):
+    await ctx.send('{0.name} зашел на сервер в {0.joined_at}'.format(member))
 
-    if role not in ctx.message.server.roles:
-        return await self.bot.say("That role doesn't exist.")
-
-    if role not in ctx.message.author.roles:
-        await self.bot.add_roles(ctx.message.author, role)
-        return await self.bot.say("{} role has been added to {}.".format(role, ctx.message.author.mention))
-
-    if role in ctx.message.author.roles:
-        await self.bot.remove_roles(ctx.message.author, role)
-        return await self.bot.say("{} role has been removed from {}.".format(role, ctx.message.author.mention))
-                                    
      
-
 client.run(os.environ['BOT_TOKEN'])
