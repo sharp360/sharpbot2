@@ -1,6 +1,6 @@
 import asyncio
 import discord
-from discord.ext.commands import Bot
+from discord.ext.commands import bot
 from discord.ext import commands
 from discord.ext import commands, tasks
 from discord import Member
@@ -102,8 +102,9 @@ async def coinflip(ctx):
     await ctx.send(random.choice(coin))
 
 @bot.command()
-async def joined(ctx, member : discord.Member):
-    await ctx.send('{0.name} зашел на сервер в {0.joined_at}'.format(member))
-
+async def repeat(times : int, content='repeating...'):
+    """Repeats a message multiple times."""
+    for i in range(times):
+        await bot.say(content)
      
 client.run(os.environ['BOT_TOKEN'])
