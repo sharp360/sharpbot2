@@ -100,6 +100,12 @@ async def megadice(ctx):
 async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
+
+@bot.command(pass_context = True)
+async def say(ctx, *args):
+    mesg = ' '.join(args)
+    await ctx.message.delete_message()
+    return await ctx.send(mesg)
      
 
 client.run(os.environ['BOT_TOKEN'])
