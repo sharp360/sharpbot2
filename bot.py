@@ -21,6 +21,11 @@ async def on_ready():
     print('Ебать работает')
 
 @client.command()
+async def load(ctx, extension):
+    client.load_extension('(Music(bot)')
+    
+
+@client.command()
 async def help(ctx):
     await ctx.send("Доступные команды: /clear, /зачистка - Как /clear, только удаляет 100 сообщений, /kick (Ник#0000), /ban (Ник#0000), /unban (Ник#0000) /dice - Рандомное число от 1 до 6, /megadice - Рандомное число от 1 до 100, /coinflip - Орел и решка, /invite - Пригласить бота на сервер, /ping - Пинг бота. Наверное")
 
@@ -100,9 +105,5 @@ async def megadice(ctx):
 async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
-    
-@client.command()
-async def joined(self, ctx, *, member: discord.Member):
-        await ctx.send(f'{member.display_name} зашел на сервер в {member.joined_at}')
-     
+
 client.run(os.environ['BOT_TOKEN'])
