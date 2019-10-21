@@ -103,10 +103,6 @@ async def coinflip(ctx):
 
 @commands.command(pass_context=True)
 async def role(self, ctx, *, role: discord.Role = None):
-    """
-    Toggle whether or not you have a role. Usage: `!role DivinityPing`. Can take roles with spaces.
-    :param role: Anything after "role"; should be the role name.
-    """
     if role is None:
         return await self.bot.say("You haven't specified a role! ")
 
@@ -119,8 +115,8 @@ async def role(self, ctx, *, role: discord.Role = None):
 
     if role in ctx.message.author.roles:
         await self.bot.remove_roles(ctx.message.author, role)
-        return await self.bot.say("{} role has been removed from {}."
-                                    .format(role, ctx.message.author.mention))
+        return await self.bot.say("{} role has been removed from {}.".format(role, ctx.message.author.mention))
+                                    
      
 
 client.run(os.environ['BOT_TOKEN'])
