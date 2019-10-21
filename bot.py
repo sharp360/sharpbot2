@@ -100,7 +100,8 @@ async def megadice(ctx):
 async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
-
+    
+@client.command()
 async def joined(self, ctx, *, member: discord.Member):
         await ctx.send(f'{member.display_name} зашел на сервер в {member.joined_at}')
      
