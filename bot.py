@@ -101,10 +101,7 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
-@bot.command()
-async def repeat(times : int, content='repeating...'):
-    """Repeats a message multiple times."""
-    for i in range(times):
-        await bot.say(content)
+async def joined(self, ctx, *, member: discord.Member):
+        await ctx.send(f'{member.display_name} зашел на сервер в {member.joined_at}')
      
 client.run(os.environ['BOT_TOKEN'])
