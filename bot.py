@@ -106,4 +106,9 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
+@client.command()
+async def Кого_чаще_кастрируют_Олега_или_Саву(ctx):
+    await ctx.send("По статистике взятой из надежного источника - 99.9% Кастрируют Олега, 0.1 остальные имена")
+
+
 client.run(os.environ['BOT_TOKEN'])
