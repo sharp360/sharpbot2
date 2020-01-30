@@ -114,7 +114,7 @@ async def join(ctx):
     if voice and voice.is_connected():
         await voice.move_to(channel)
     else:
-        voice = await channel.connect()
+        await channel.connect()
         
     await voice.disconnect()
 
