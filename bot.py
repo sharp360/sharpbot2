@@ -155,6 +155,7 @@ async def play(ctx, url: str):
     try:
         if song_there:
             os.remove("song.mp3")
+            print("Удалил старый файл")
     except PermissionError:
         await ctx.send("Если вы хотите включить другую музыку, выключите музыку которая сейчас играет командой /stop")
         return  
@@ -188,8 +189,10 @@ async def play(ctx, url: str):
     voice.source.volume = 0.07
 
     nname = name.rsplit("-", 2)
-    await ctx.send(f"Проигрываю: {nname}")
+    await ctx.send(f"Проигрываю: {nname[0]}")
     print("ебашу хардбаcсс")
+
+
 
 
 
