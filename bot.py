@@ -15,7 +15,6 @@ from discord import Game
 import os
 
 client = commands.Bot(command_prefix = '/')
-bot = commands.Bot(command_prefix = '/')
 #client.remove_command('help')
 
 @client.event
@@ -108,6 +107,8 @@ async def megadice(ctx):
 async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
+
+bot = commands.Bot(command_prefix = '/')
 
 @bot.command(pass_context=True, aliases=['j', 'joi'])
 async def join(ctx):
