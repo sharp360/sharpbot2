@@ -138,6 +138,8 @@ async def leave(ctx):
         await voice.disconnect()
         await ctx.send(f"Left{channel}")
     else:
-        await ctx.send("Бот не находиться в голосовом канале")
+        await ctx.send("Бот не находиться  в голосовом канале")
+
+
 
 client.run(os.environ['BOT_TOKEN'])
