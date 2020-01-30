@@ -126,6 +126,7 @@ async def join(ctx):
         await voice.move_to(channel)
     else:
         await channel.connect()
+        await ctx.send(f"Бот присоединился в {channel}")
         
     await voice.disconnect()
 
@@ -133,9 +134,6 @@ async def join(ctx):
         await voice.move_to(channel)
     else:
         voice = await channel.connect()
-        print(f"Бот присоединился {channel}\n")
-
-    await ctx.send(f"Бот присоединился в {channel}")
 
 @bot.command(pass_context=True, aliases=['l', 'lea'])
 async def leave(ctx):
