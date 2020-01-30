@@ -1,8 +1,12 @@
 import asyncio
 import discord
-from discord.ext.commands import Bot
 from discord.ext import commands
+from discord.ext.commands import Bot
+from discord.utils import get
+import youtube_dl
 from discord.ext import commands, tasks
+from discord import Member
+from discord.ext.commands import has_permissions, MissingPermissions
 from itertools import cycle
 import time
 import random
@@ -10,17 +14,18 @@ from discord import Game
 import os
 
 client = commands.Bot(command_prefix = '/')
+bot = commands.Bot(command_prefix = '/')
 client.remove_command('help')
-status = cycle(['Команды /help'])
 
 @client.event
 async def on_ready():
-    chang_status.start()
+    await client.change_presence(status=discord.Status, activity=discord.Game('Команды /help'))
     print('Ебать работает')
 
-@tasks.loop(seconds=0.5)
-async def chang_status():
-    await client.change_presence(activity=discord.Game(next(status)))
+@client.command()
+async def load(ctx, extension):
+    client.load_extension('(Music(bot)')
+    
 
 @client.command()
 async def help(ctx):
@@ -32,14 +37,14 @@ async def invite(ctx):
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
-async def clear(ctx, ammount=6):
-    await ctx.channel.purge(limit=ammount)
+async def clear(ctx, amount: int):
+    deleted = await ctx.channel.purge(limit=amount)
     embed = discord.Embed(
-        title='Сообщение удалено',
-        colour=discord.Colour.green()
+        title=(f"Удалено {len(deleted)} сообщений"),
+        colour=discord.Colour.purple()
     )
-    
-    embed.set_image(url='https://cdn.discordapp.com/attachments/447540683574738952/588744831539347468/me_irl.gif')
+  
+    embed.set_image(url='https://cdn.discordapp.com/attachments/624937083605352469/635196301780320271/Dz-A-4aQgiY.jpg')
 
     await ctx.send(embed=embed)
 
@@ -54,7 +59,7 @@ async def зачистка(ctx):
     await ctx.channel.purge(limit=100)
     embed = discord.Embed(
         title='Произошла зОчистка',
-        colour=discord.Colour.green()
+        colour=discord.Colour.purple()
     )
     
     embed.set_image(url='https://cdn.discordapp.com/attachments/447540683574738952/589700786338922509/image0-11-1.jpg')
@@ -65,7 +70,7 @@ async def зачистка(ctx):
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
-    await ctx.send(f'{member.mention} Был кикнут')
+    await ctx.send(f'{member.mention} Подсрачником отправлен в Украину')
 
 @client.command()
 @commands.has_permissions(ban_members=True)
@@ -103,6 +108,10 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
-client.run(os.environ['BOT_TOKEN'])
+@client.command(pass_context=True, aliases=['j', 'joi'])
+async def join(ctx):
+    global voice
+    channel = ctx.message.author.voice.channel
+    voice = get(bot.voice_clients, guild=ctx.guild)
 
-##client.run(os.environ['BOT_TOKEN'])
+client.run(os.environ['BOT_TOKEN'])
