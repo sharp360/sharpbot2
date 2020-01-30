@@ -16,7 +16,7 @@ import os
 
 client = commands.Bot(command_prefix = '/')
 bot = commands.Bot(command_prefix = '/')
-client.remove_command('help')
+#client.remove_command('help')
 
 @client.event
 async def on_ready():
@@ -28,7 +28,7 @@ async def load(ctx, extension):
     client.load_extension('(Music(bot)')
     
 
-@client.command()
+#@client.command()
 async def help(ctx):
     await ctx.send("Доступные команды: /clear, /зачистка - Как /clear, только удаляет 100 сообщений, /kick (Ник#0000), /ban (Ник#0000), /unban (Ник#0000) /dice - Рандомное число от 1 до 6, /megadice - Рандомное число от 1 до 100, /coinflip - Орел и решка, /invite - Пригласить бота на сервер, /ping - Пинг бота. Наверное")
 
