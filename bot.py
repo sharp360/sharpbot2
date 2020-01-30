@@ -189,7 +189,7 @@ async def play(ctx, url: str):
 
     nname = name.rsplit("-", 2)
     await ctx.send(f"Проигрываю: {nname}")
-    print("ебашу хардбасс")
+    print("ебашу хардбаcсс")
 
 
 bot.run(os.environ['BOT_TOKEN'])
