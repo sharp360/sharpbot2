@@ -106,14 +106,14 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
-@bot.command(brief="Random Urban Dictionary word '/ud'", aliases=['ud'])
+@bot.command(aliases=['ud'])
 async def urbandic(ctx):
         ran = urbandictionary.random()
         limit = 1
-        print("Asking urbandictionary.com for a word and def.")
+        print("Запрашиваю случайное слово и значение с сайта urbandictionary.com.")
         for r in ran:
             while limit != 0:
-                await ctx.send("Word: " + r.word + " | " + "Def: " + r.definition)
+                await ctx.send("Слово: " + r.word + " | " + "Значение: " + r.definition)
                 limit -= 1
 
 @bot.command(pass_context=True, aliases=['j', 'joi'])
