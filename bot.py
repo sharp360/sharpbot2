@@ -109,7 +109,7 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
-@client.command(pass_context=True, aliases=['j', 'joi'])
+@bot.command(pass_context=True, aliases=['j', 'joi'])
 async def join(ctx):
     global voice
     channel = ctx.message.author.voice.channel
@@ -130,7 +130,7 @@ async def join(ctx):
 
     await ctx.send("Бот присоединился в {channel}")
 
-@client.command(pass_context=True, aliases=['l', 'lea'])
+@bot.command(pass_context=True, aliases=['l', 'lea'])
 async def leave(ctx):
     channel = ctx.message.author.voice.channel
     voice = get(bot.voice_clients, guild=ctx.guild)
