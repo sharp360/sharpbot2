@@ -1,5 +1,6 @@
 import asyncio
 import discord
+from discord.ext.commands import bot
 from discord.ext import commands
 from discord.ext.commands import Bot
 from discord.utils import get
@@ -138,7 +139,7 @@ async def leave(ctx):
         await voice.disconnect()
         await ctx.send(f"Left{channel}")
     else:
-        await ctx.send("Бот не находиться  в голосовом канале")
+        await ctx.send("Бот не находиться в голосовом канале")
 
 
 
