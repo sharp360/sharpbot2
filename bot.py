@@ -16,7 +16,12 @@ import os
 import urbandictionary
 import ffmpeg
 if not discord.opus.is_loaded():
-    discord.opus.load_opus('libopus.so')
+    # the 'opus' library here is opus.dll on windows
+    # or libopus.so on linux in the current directory
+    # you should replace this with the location the
+    # opus library is located in and with the proper filename.
+    # note that on windows this DLL is automatically provided for you
+    discord.opus.load_opus('opus')
 
 #client = commands.Bot(command_prefix = '/')
 bot = commands.Bot(command_prefix = '/')
