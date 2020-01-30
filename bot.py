@@ -84,7 +84,8 @@ async def unban(ctx, *, member):
 
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
-            await ctx.send(f'{user.mention} Вернулся с банановых островов')
+            await ctx.send(f'{user.mention} Был разбанен')
+            return
 
 @bot.command()
 async def dice(ctx):
