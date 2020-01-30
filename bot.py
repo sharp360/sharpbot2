@@ -108,7 +108,7 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
-@client.command(pass_context=True, aliases=['j', 'joi'])
+@bot.command(pass_context=True, aliases=['j', 'joi'])
 async def join(ctx):
     global voice
     channel = ctx.message.author.voice.channel
@@ -121,5 +121,16 @@ async def join(ctx):
         print(f"Чото написать нада тут бот зашел в кАнал {channel}\n")
 
     await ctx.send(f"Joined {channel}")
+
+@bot.command(pass_context=True, aliases=['l', 'lea'])
+async def leave(ctx):
+    channel = ctx.message.author.voice.channel
+    voice = get(bot.voice_clients, guild=ctx.guild)
+    
+    if voice and voice.is_connected():
+        await voice.disconnect()
+        await ctx.send(f"Left{channel}")
+    else:
+        await ctx.send("Бот не находиться в голосовом канале")
 
 client.run(os.environ['BOT_TOKEN'])
