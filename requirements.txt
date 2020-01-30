@@ -15,3 +15,4 @@ ffmpeg
 youtube_dl
 PyNaCl
 urbandictionary
+git+https://github.com/xrisk/heroku-opus.git
