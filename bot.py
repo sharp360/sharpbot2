@@ -118,5 +118,8 @@ async def join(ctx):
         await voice.move_to(channel)
     else:
         voice = await channel.connect
+        print(f"Чото написать нада тут бот зашел в кАнал (channel)\n")
+
+    await ctx.send
 
 client.run(os.environ['BOT_TOKEN'])
