@@ -13,6 +13,7 @@ import time
 import random
 from discord import Game
 import os
+import urbandictionary
 
 #client = commands.Bot(command_prefix = '/')
 bot = commands.Bot(command_prefix = '/')
@@ -104,6 +105,16 @@ async def megadice(ctx):
 async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
+
+@bot.command(brief="Random Urban Dictionary word '/ud'", aliases=['ud'])
+async def urbandic(ctx):
+        ran = urbandictionary.random()
+        limit = 1
+        print("Asking urbandictionary.com for a word and def.")
+        for r in ran:
+            while limit != 0:
+                await ctx.send("Word: " + r.word + " | " + "Def: " + r.definition)
+                limit -= 1
 
 @bot.command(pass_context=True, aliases=['j', 'joi'])
 async def join(ctx):
