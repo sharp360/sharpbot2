@@ -15,6 +15,8 @@ from discord import Game
 import os
 import urbandictionary
 import ffmpeg
+if not discord.opus.is_loaded():
+    discord.opus.load_opus('libopus.so')
 
 #client = commands.Bot(command_prefix = '/')
 bot = commands.Bot(command_prefix = '/')
