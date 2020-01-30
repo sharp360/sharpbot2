@@ -13,3 +13,4 @@ art
 lxml
 ffmpeg
 youtube_dl
+PyNaCl
