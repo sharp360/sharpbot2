@@ -192,6 +192,38 @@ async def play(ctx, url: str):
     await ctx.send(f"Проигрываю: {nname[0]}")
     print("ебашу хардбаcсс")
 
+@bot.command(pass_context=True)
+async def pause(ctx):
+
+    voice = get(bot.voice_clients, giuld=ctx.guild)
+
+    if voice and voice.is_playing():
+        print("Пауза")
+        voice.pause()
+        await ctx.send("Музыка установлена на паузу")
+    else:
+        await ctx.send("Музыка не проигрываеться, не могу поставить на паузу")
+
+@bot.command(pass_context=True)
+async def unpause(ctx): 
+
+    voice = get(bot.voice_clients, giuld=ctx.guild)
+    if voice and voice.is_paused():
+        voice.resume()
+        await ctx.send("Музыка снята с паузы")
+    else:
+        await ctx.send("Музыка уже проигрываеться, не могу снять с паузы")
+
+@bot.command(pass_context=True)
+async def stop(ctx): 
+
+    voice = get(bot.voice_clients, giuld=ctx.guild)
+    if voice and voice.is_playing():
+        voice.stop()
+        await ctx.send("Проигрывание мызыки остановлено")
+    else:
+        await ctx.send("Музыка уже выключена, не могу выключить")
+    
 
 
 
