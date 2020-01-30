@@ -124,7 +124,7 @@ async def join(ctx):
         voice = await channel.connect()
         print(f"Бот присоединился {channel}\n")
 
-    await ctx.send("Бот присоединился в {channel}")
+    await ctx.send(f"Бот присоединился в {channel}")
 
 @bot.command(pass_context=True, aliases=['l', 'lea'])
 async def leave(ctx):
@@ -133,9 +133,9 @@ async def leave(ctx):
     
     if voice and voice.is_connected():
         await voice.disconnect()
-        await ctx.send(f"Left{channel}")
+        await ctx.send(f"Бот вышел из {channel}")
     else:
-        await ctx.send("Бот не находиться в голосовом канале")
+        await ctx.send(f"Бот не находиться в голосовом канале")
 
 
 
