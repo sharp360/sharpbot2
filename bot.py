@@ -14,17 +14,18 @@ import random
 from discord import Game
 import os
 import urbandictionary
+import ffmpeg
 
 #client = commands.Bot(command_prefix = '/')
 bot = commands.Bot(command_prefix = '/')
-#client.remove_command('help')
+bot.remove_command('help')
 
 @bot.event
 async def on_ready():
     await bot.change_presence(status=discord.Status, activity=discord.Game('Команды /help'))
     print('Ебать работает')
     
-#@client.command()
+@bot.command()
 async def help(ctx):
     await ctx.send("Доступные команды: /clear, /зачистка - Как /clear, только удаляет 100 сообщений, /kick (Ник#0000), /ban (Ник#0000), /unban (Ник#0000) /dice - Рандомное число от 1 до 6, /megadice - Рандомное число от 1 до 100, /coinflip - Орел и решка, /invite - Пригласить бота на сервер, /ping - Пинг бота. Наверное")
 
@@ -146,6 +147,47 @@ async def leave(ctx):
     else:
         await ctx.send(f"Бот не находиться в голосовом канале")
 
+@bot.command(pass_context=True)
+async def play(ctx, url: str):
+    song_there = os.path.isfile("song.mp3")
+    try:
+        if song_there:
+            os.remove("song.mp3")
+    except PermissionError:
+        await ctx.send("Если вы хотите включить другую музыку, выключите музыку которая сейчас играет командой /stop")
+        return  
+
+    await ctx.send("Скачиваю mp3 файл")
+
+    voice = get(bot.voice_clients, guild=ctx.guild)
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+    }
+    #Я не ебу чо тут вобще написано
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        print("Качаю музончик ебать \n")
+        ydl.download([url])
+    
+    for file in os.listdir("./"):
+        if file.endswith(".mp3"):
+            name = file
+            print(f"Переименовал файл: {file}\n")
+            os.rename(file, "song.mp3")
+
+    voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print(f"{name} закончил играть"))
+    voice.source = discord.PCMVolumeTransformer(voice.source)
+    voice.source.volume = 0.07
+
+    nname = name.rsplit("-", 2)
+    await ctx.send(f"Проигрываю: {nname}")
+    print("ебашу хардбасс")
 
 
 bot.run(os.environ['BOT_TOKEN'])
