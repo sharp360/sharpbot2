@@ -126,7 +126,7 @@ async def join(ctx):
         await voice.move_to(channel)
     else:
         voice = await channel.connect()
-        print(f"Бот  {channel}\n")
+        print(f"Бот присоединился {channel}\n")
 
     await ctx.send("Бот присоединился в {channel}")
 
