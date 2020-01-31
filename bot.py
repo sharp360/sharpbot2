@@ -224,5 +224,18 @@ async def stop(ctx):
         await ctx.send("Проигрывание мызыки остановлено")
     else:
         await ctx.send("Музыка уже выключена, не могу выключить")
+
+@bot.command(pass_context=True)
+async def volume(ctx, volume: int):
+
+    if ctx.voice_client is None:
+        return await ctx.send("Бот не находится в голосовом канале")
+
+
+
+        ctx.voice_client.source.volume = volume / 100
+        await ctx.send(f"Изменил громкость на {volume}%")
+
+
     
 bot.run(os.environ['BOT_TOKEN'])
