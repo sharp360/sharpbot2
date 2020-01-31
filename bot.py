@@ -156,6 +156,7 @@ async def play(ctx, url: str):
         if song_there:
             os.remove("song.mp3")
             print("Удалил старый файл")
+            await ctx.channel.purge(limit=1)
     except PermissionError:
         await ctx.send("Если вы хотите включить другую музыку, выключите музыку которая сейчас играет командой /stop")
         return  
