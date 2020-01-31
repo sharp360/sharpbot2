@@ -190,7 +190,7 @@ async def play(ctx, url: str):
     voice.source.volume = 0.07
 
     nname = name.rsplit("-", 2)
-    await ctx.send(f"Проигрываю: {nname[0]}")
+    await ctx.send(f"Проигрываю: {nname[1]}")
     print("ебашу хардбаcсс")
 
 @bot.command(pass_context=True)
