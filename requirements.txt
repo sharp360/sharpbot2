@@ -15,4 +15,4 @@ ffmpeg
 youtube_dl
 PyNaCl
 urbandictionary
-
+spotdl
