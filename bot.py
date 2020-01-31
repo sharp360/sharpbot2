@@ -110,6 +110,11 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
+@bot.command()
+async def stats(ctx, memeber: discord.Member):
+    embed = discord.Embed
+    embed.set_image(url=member.avatar_url)
+
 @bot.command(aliases=['ud'])
 async def urbandic(ctx):
         ran = urbandictionary.random()
