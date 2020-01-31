@@ -150,7 +150,6 @@ async def play(ctx, *url: str):
         if song_there:
             os.remove("song.mp3")
             print("Удалил старый файл")
-            await ctx.channel.purge(limit=1)
     except PermissionError:
         await ctx.send("Если вы хотите включить другую музыку, выключите музыку которая сейчас играет командой /stop")
         return  
@@ -162,21 +161,17 @@ async def play(ctx, *url: str):
     ydl_opts = {
         'format': 'bestaudio/best',
         'quiet': True,
-        'outtmpl': './song,mp3',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
             'preferredquality': '192',
         }],
     }
-    try:
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            print("Качаю музончик ебать \n")
-            ydl.download([url])
-    except:
-        c_path = os.path.dirname(os.path.realpath(__file__))
-        system("spotdl -f " + '"' + c_path + '"' + " -s " + url)
-    
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        print("Качаю музончик ебать \n")
+        ydl.download([url])
+
     for file in os.listdir("./"):
         if file.endswith(".mp3"):
             name = file
