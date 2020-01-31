@@ -15,7 +15,6 @@ from discord import Game
 import os
 import urbandictionary
 import ffmpeg
-from os import system
 if not discord.opus.is_loaded():
     discord.opus.load_opus('libopus.so')
 
@@ -144,7 +143,7 @@ async def leave(ctx):
         await ctx.send(f"Бот не находиться в голосовом канале")
 
 @bot.command(pass_context=True)
-async def play(ctx, *url: str):
+async def play(ctx, url: str):
     song_there = os.path.isfile("song.mp3")
     try:
         if song_there:
