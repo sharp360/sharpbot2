@@ -15,6 +15,7 @@ from discord import Game
 import os
 import urbandictionary
 import ffmpeg
+from os import system
 if not discord.opus.is_loaded():
     discord.opus.load_opus('libopus.so')
 
@@ -121,22 +122,15 @@ async def urbandic(ctx):
 
 @bot.command(pass_context=True, aliases=['j', 'joi'])
 async def join(ctx):
-    global voice
     channel = ctx.message.author.voice.channel
     voice = get(bot.voice_clients, guild=ctx.guild)
 
-    if voice and voice.is_connected():
-        await voice.move_to(channel)
-    else:
-        await channel.connect()
-        await ctx.send(f"Бот присоединился в {channel}")
-        
-    await voice.disconnect()
+    if voice is not None:
+        return await voice.move_to(channel)
 
-    if voice and voice.is_connected():
-        await voice.move_to(channel)
-    else:
-        voice = await channel.connect()
+    await channel.connect()
+    
+    await ctx.send(f"Бот присоединился в {channel}")
 
 @bot.command(pass_context=True, aliases=['l', 'lea'])
 async def leave(ctx):
@@ -150,7 +144,7 @@ async def leave(ctx):
         await ctx.send(f"Бот не находиться в голосовом канале")
 
 @bot.command(pass_context=True)
-async def play(ctx, url: str):
+async def play(ctx, *url: str):
     song_there = os.path.isfile("song.mp3")
     try:
         if song_there:
@@ -167,17 +161,21 @@ async def play(ctx, url: str):
 
     ydl_opts = {
         'format': 'bestaudio/best',
+        'quiet': True,
+        'outtmpl': './song,mp3',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
             'preferredquality': '192',
         }],
     }
-    #Я не ебу чо тут вобще написано
-
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        print("Качаю музончик ебать \n")
-        ydl.download([url])
+    try:
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            print("Качаю музончик ебать \n")
+            ydl.download([url])
+    except:
+        c_path = os.path.dirname(os.path.realpath(__file__))
+        system("spotdl -f " + '"' + c_path + '"' + " -s " + url)
     
     for file in os.listdir("./"):
         if file.endswith(".mp3"):
