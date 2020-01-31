@@ -231,10 +231,8 @@ async def volume(ctx, volume: int):
     if ctx.voice_client is None:
         return await ctx.send("Бот не находится в голосовом канале")
 
-
-
-        ctx.voice_client.source.volume = volume / 100
-        await ctx.send(f"Изменил громкость на {volume}%")
+    ctx.voice_client.source.volume = volume / 100
+    await ctx.send(f"Изменил громкость на {volume}%")
 
 
     
