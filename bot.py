@@ -19,7 +19,7 @@ if not discord.opus.is_loaded():
     discord.opus.load_opus('libopus.so')
 
 #client = commands.Bot(command_prefix = '/')
-bot = commands.Bot(command_prefix = '~')
+bot = commands.Bot(command_prefix = '$')
 bot.remove_command('help')
 
 @bot.event
@@ -76,9 +76,10 @@ async def kick(ctx, member : discord.Member, *, reason=None):
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason=reason)
-    await ctx.send(f'{member.mention} Отправился на банановые острова')
+    await ctx.send(f'{member.mention} Был заблокирован')
 
 @bot.command()
+@commands.has_permissions(ban_members=True)
 async def unban(ctx, *, member):
     banned_users = await ctx.guild.bans()
     member_name, member_discriminator = member.split('#')
@@ -149,6 +150,7 @@ async def play(ctx, url: str):
         if song_there:
             os.remove("song.mp3")
             print("Удалил старый файл")
+            await ctx.channel.purge(limit=1)
     except PermissionError:
         await ctx.send("Если вы хотите включить другую музыку, выключите музыку которая сейчас играет командой /stop")
         return  
@@ -166,11 +168,12 @@ async def play(ctx, url: str):
             'preferredquality': '192',
         }],
     }
+    #Я не ебу чо тут вобще написано
 
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         print("Качаю музончик ебать \n")
         ydl.download([url])
-
+    
     for file in os.listdir("./"):
         if file.endswith(".mp3"):
             name = file
