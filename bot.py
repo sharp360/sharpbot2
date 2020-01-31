@@ -195,7 +195,7 @@ async def play(ctx, url: str):
 @bot.command(pass_context=True)
 async def pause(ctx):
 
-    voice = get(bot.voice_clients, giuld=ctx.guild)
+    voice = get(bot.voice_clients, guild=ctx.guild)
 
     if voice and voice.is_playing():
         print("Пауза")
@@ -207,7 +207,7 @@ async def pause(ctx):
 @bot.command(pass_context=True)
 async def unpause(ctx): 
 
-    voice = get(bot.voice_clients, giuld=ctx.guild)
+    voice = get(bot.voice_clients, guild=ctx.guild)
     if voice and voice.is_paused():
         voice.resume()
         await ctx.send("Музыка снята с паузы")
@@ -217,15 +217,11 @@ async def unpause(ctx):
 @bot.command(pass_context=True)
 async def stop(ctx): 
 
-    voice = get(bot.voice_clients, giuld=ctx.guild)
+    voice = get(bot.voice_clients, guild=ctx.guild)
     if voice and voice.is_playing():
         voice.stop()
         await ctx.send("Проигрывание мызыки остановлено")
     else:
         await ctx.send("Музыка уже выключена, не могу выключить")
     
-
-
-
-
 bot.run(os.environ['BOT_TOKEN'])
