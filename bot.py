@@ -41,8 +41,8 @@ async def help(ctx):
     embed.add_field(name="$dice", value="Подбросить кости", inline=True)
     embed.add_field(name="$coinflip", value="Подбросить монетку", inline=True)
     embed.add_field(name="$invite", value="Пригласить бота на сервер", inline=True)
-    embed.add_field(name="$help_music", value="Команды музыкального бота", inline=True)
     embed.add_field(name="$urbandic", value="Значение случайного слова с urbandictionary", inline=True)
+    embed.add_field(name="$help_music", value="Команды музыкального бота", inline=True)
     await ctx.send(embed=embed)
 
 @bot.command()
@@ -58,7 +58,7 @@ async def help_music(ctx):
     embed.add_field(name="$pause", value="Поставить на паузу", inline=True)
     embed.add_field(name="$unpause", value="Снять с паузы", inline=True)
     embed.add_field(name="$volume", value="Изменить громкость", inline=True)
-    await ctx.bot.send(embed=embed)
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def invite(ctx):
