@@ -1,5 +1,5 @@
 import asyncio
-import os
+
 import discord
 import youtube_dl
 
@@ -132,4 +132,3 @@ async def on_ready():
     print('------')
 
 bot.add_cog(Music(bot))
-bot.run(os.environ['BOT_TOKEN'])
