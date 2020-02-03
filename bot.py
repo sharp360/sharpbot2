@@ -221,6 +221,7 @@ async def stop(ctx):
         await ctx.send("Музыка уже выключена, не могу выключить")
 
 @bot.command(pass_context=True)
+@commands.is_owner()
 async def volume(ctx, volume: int):
 
     if ctx.voice_client is None:
