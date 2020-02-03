@@ -148,7 +148,7 @@ async def leave(ctx):
 async def play(ctx, *url: str):
 
     def check_queue():
-        Queue_infile = os.path.isdir(".\Queue")
+        Queue_infile = os.path.isdir("./Queue")
         if Queue_infile is True:
             DIR = os.path.abspath(os.path.realpath("Queue"))
             length = len(os.listdir(DIR))
@@ -275,8 +275,10 @@ async def volume(ctx, volume: int):
     ctx.voice_client.source.volume = volume / 100
     await ctx.send(f"Изменил громкость на {volume}%")
 
+queues = {}
+
 @bot.command(pass_context=True, aliases=['q'])
-async def queue(ctx, url:str):
+async def queue(ctx, url: str):
     Queue_infile = os.path.isdir("./Queue")
     if Queue_infile is False:
         os.mkdir("Queue")
@@ -291,7 +293,7 @@ async def queue(ctx, url:str):
             add_queue = False
             queues[q_num] = q_num
 
-    queue_path = os.path.abspath(os.path.realpath("Queue") + f"\song{q_num}.%(ext)s")
+    queue_path = os.path.abspath(os.path.realpath("Queue") + f"/song{q_num}.%(ext)s")
 
     ydl_opts = {
         'format': 'bestaudio/best',
