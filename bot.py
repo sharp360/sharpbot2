@@ -35,17 +35,6 @@ async def help(ctx):
 async def invite(ctx):
     await ctx.send("https://bit.ly/2K6B5t4")
 
-@bot.event
-async def on_message(Я: Пишу боту):
-    embed = discord.Embed(
-            colour=discord.Colour.purple()
-        )
-        
-        embed.set_image(url='https://media.discordapp.net/attachments/605243396012900362/672940207854714909/3b17d8218fffda328bf513b293b59f33.png?width=586&height=566')
-
-        await ctx.send(embed=embed)
-
-
 @bot.command()
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount: int):
@@ -121,11 +110,6 @@ async def coinflip(ctx):
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
-@bot.command()
-async def stats(ctx, memeber: discord.Member):
-    embed = discord.Embed
-    embed.set_image(url=member.avatar_url)
-
 @bot.command(aliases=['ud'])
 async def urbandic(ctx):
         ran = urbandictionary.random()
@@ -160,7 +144,7 @@ async def leave(ctx):
         await ctx.send(f"Бот не находиться в голосовом канале")
 
 @bot.command(pass_context=True)
-async def play(ctx, url: str):
+async def play(ctx, *url: str):
     song_there = os.path.isfile("song.mp3")
     try:
         if song_there:
@@ -184,8 +168,7 @@ async def play(ctx, url: str):
             'preferredquality': '192',
         }],
     }
-    #Я не ебу чо тут вобще написано
-
+    
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         print("Качаю музончик ебать \n")
         ydl.download([url])
