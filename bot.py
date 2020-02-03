@@ -15,6 +15,7 @@ from discord import Game
 import os
 import urbandictionary
 import ffmpeg
+import sys
 if not discord.opus.is_loaded():
     discord.opus.load_opus('libopus.so')
 
@@ -27,13 +28,14 @@ async def on_ready():
     await bot.change_presence(status=discord.Status, activity=discord.Game('Команды /help'))
     print('Ебать работает')
 
-@bot.command()
-@commands.is_owner()
-async def load(ctx, extension):
-    client.load_extension(f'cogs.{extension}')
+initial_extensions = ['cogs.musicbot']
 
-for filename in os.listdir('./cogs'):
-
+if __name__ == '__main__':
+    for extension in initial_extensions:
+        try:
+            bot.load_extension(extension)
+        except Exception as e:
+            print(f'Failed to load extension {extension}', file=sys.stderr)
     
 @bot.command()
 async def help(ctx):
