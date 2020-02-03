@@ -15,7 +15,6 @@ from discord import Game
 import os
 import urbandictionary
 import ffmpeg
-import shutil
 if not discord.opus.is_loaded():
     discord.opus.load_opus('libopus.so')
 
@@ -41,7 +40,7 @@ async def invite(ctx):
 async def clear(ctx, amount: int):
     deleted = await ctx.channel.purge(limit=amount)
     embed = discord.Embed(
-        title=(f"Удалено {len(deleted)} сообщения(ний)"),
+        title=(f"Удалено {len(deleted)} сообщений"),
         colour=discord.Colour.purple()
     )
   
@@ -145,60 +144,16 @@ async def leave(ctx):
         await ctx.send(f"Бот не находиться в голосовом канале")
 
 @bot.command(pass_context=True)
-async def play(ctx, *url: str):
-
-    def check_queue():
-        Queue_infile = os.path.isdir("./Queue")
-        if Queue_infile is True:
-            DIR = os.path.abspath(os.path.realpath("Queue"))
-            length = len(os.listdir(DIR))
-            try:
-                first_file = os.listdir(DIR)[0]
-            except:
-                queues.clear()
-                return
-            main_location = os.path.dirname(os.path.realpath(__file__))
-            song_path = os.path.abspath(os.path.realpath("Queue") + "\\" + first_file)
-            if length != 0:
-                song_path = os.path.isfile("song.mp3")
-                if song_there:
-                    os.remove("song.mp3")
-                shutil.move(song_path, main_location)
-                for file in os.listdir("./"):
-                    if file.endswith(".mp3"):
-                        os.rename(file, 'song.mp3')
-
-                voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: check_queue())
-                voice.source = discord.PCMVolumeTransformer(voice.source)
-                voice.source.volume = 0.07
-            
-            else:
-                queue.clear()
-                return
-
-        else:
-            queues.clear()
-                
+async def play(ctx, url: str):
     song_there = os.path.isfile("song.mp3")
     try:
         if song_there:
             os.remove("song.mp3")
-            queue.clear()
             print("Удалил старый файл")
             await ctx.channel.purge(limit=1)
     except PermissionError:
         await ctx.send("Если вы хотите включить другую музыку, выключите музыку которая сейчас играет командой /stop")
         return  
-
-
-    Queue_infile = os.path.isdir("./Queue")
-    try:
-        Queue_folder = "./Queue"
-        if Queue_infile is True:
-            print("Удалил старый плейлист")
-            shutil.rmtree(Queue_folder)
-    except:
-        print("Плейлиста нету")
 
     await ctx.send("Скачиваю mp3 файл")
 
@@ -213,7 +168,8 @@ async def play(ctx, *url: str):
             'preferredquality': '192',
         }],
     }
-    
+    #Я не ебу чо тут вобще написано
+
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         print("Качаю музончик ебать \n")
         ydl.download([url])
@@ -224,7 +180,7 @@ async def play(ctx, *url: str):
             print(f"Переименовал файл: {file}\n")
             os.rename(file, "song.mp3")
 
-    voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: check_queue())
+    voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print(f"{name} закончил играть"))
     voice.source = discord.PCMVolumeTransformer(voice.source)
     voice.source.volume = 0.07
 
@@ -256,9 +212,8 @@ async def unpause(ctx):
 
 @bot.command(pass_context=True)
 async def stop(ctx): 
-    voice = get(bot.voice_clients, guild=ctx.guild)
 
-    queues.clear()
+    voice = get(bot.voice_clients, guild=ctx.guild)
     if voice and voice.is_playing():
         voice.stop()
         await ctx.send("Проигрывание мызыки остановлено")
@@ -274,40 +229,6 @@ async def volume(ctx, volume: int):
     ctx.voice_client.source.volume = volume / 100
     await ctx.send(f"Изменил громкость на {volume}%")
 
-queues = {}
 
-@bot.command(pass_context=True, aliases=['q'])
-async def queue(ctx, url: str):
-    Queue_infile = os.path.isdir("./Queue")
-    if Queue_infile is False:
-        os.mkdir("Queue")
-    DIR = os.path.abspath(os.path.realpath("Queue"))
-    q_num = len(os.listdir(DIR))
-    q_num += 1
-    add_queue = True
-    while add_queue:
-        if q_num in queues:
-            q_num += 1
-        else:
-            add_queue = False
-            queues[q_num] = q_num
-
-    queue_path = os.path.abspath(os.path.realpath("Queue") + f"/song{q_num}.%(ext)s")
-
-    ydl_opts = {
-        'format': 'bestaudio/best',
-        'quiet': True,
-        'outtmpl': queue_path, 
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-    } 
     
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        print("Качаю музончик ебать \n")
-        ydl.download([url])
-    await ctx.send("Добавляю музыку " + str(q_num) + " в очередь") 
-
-    bot.run(os.environ['BOT_TOKEN'])
+bot.run(os.environ['BOT_TOKEN'])
