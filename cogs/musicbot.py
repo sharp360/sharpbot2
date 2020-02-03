@@ -1,5 +1,4 @@
 import asyncio
-import os
 
 import discord
 import youtube_dl
@@ -21,6 +20,7 @@ ytdl_format_options = {
     'quiet': True,
     'no_warnings': True,
     'default_search': 'auto',
+    'source_address': '0.0.0.0' # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
 
 ffmpeg_options = {
@@ -125,5 +125,10 @@ class Music(commands.Cog):
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("$"),
                    description='Relatively simple music bot example')
+
+@bot.event
+async def on_ready():
+    print('Logged in as {0} ({0.id})'.format(bot.user))
+    print('------')
 
 bot.add_cog(Music(bot))
