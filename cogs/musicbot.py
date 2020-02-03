@@ -77,6 +77,13 @@ class Music(commands.Cog):
 
     @commands.command(aliases=['s'])
     async def stream(self, ctx, *, url):
+        
+        channel = ctx.message.author.voice.channel
+        voice = get(bot.voice_clients, guild=ctx.guild)
+        vc = ctx.voice_client
+
+        if not vc:
+            return await voice.move_to(channel)
 
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
