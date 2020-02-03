@@ -28,20 +28,16 @@ async def on_ready():
     await bot.change_presence(status=discord.Status, activity=discord.Game('Команды /help'))
     print('Ебать работает')
 
-@bot.command()
-@commands.is_owner()
-async def load(ctx, extension):
-    bot.load_extension(f'cogs.{extension}')
-
-@bot.command()
-@commands.is_owner()
-async def unload(ctx, extension):
-    bot.unload_extension(f'cogs.{extension}')
-
-for filename in os.listdir('./cogs'):
-    if filename.endswith('.py'):
-        bot.load_extension(f'cogs.{filename[:-3]}')
-
+for cog in os.listdir(".\\cogs"):
+        if cog.endswith(".py"):
+            try:
+                print(cog)
+                cog = f"cogs.{cog.replace('.py', '')}"
+                bot.load_extension(cog)
+                print("Cog Loaded\n")
+            except Exception as e:
+                print(f'{cog} can not be loaded\n')
+                raise e
 
 @bot.command()
 async def help(ctx):
