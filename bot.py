@@ -152,7 +152,6 @@ async def play(ctx, *url: str):
         if Queue_infile is True:
             DIR = os.path.abspath(os.path.realpath("Queue"))
             length = len(os.listdir(DIR))
-            still_q = length - 1
             try:
                 first_file = os.listdir(DIR)[0]
             except:
