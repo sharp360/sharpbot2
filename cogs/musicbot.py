@@ -4,6 +4,7 @@ import discord
 import youtube_dl
 
 from discord.ext import commands
+from discord.utils import get
 
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
@@ -59,10 +60,14 @@ class Music(commands.Cog):
     @commands.command()
     async def play(self, ctx, *, url):
 
+        channel = ctx.message.author.voice.channel
+        voice = get(bot.voice_clients, guild=ctx.guild)
         vc = ctx.voice_client
 
         if not vc:
-            await ctx.invoke(ctx.connect_)
+            return await voice.move_to(channel)
+
+
 
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop)
