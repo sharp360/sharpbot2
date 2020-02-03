@@ -121,5 +121,17 @@ async def urbandic(ctx):
                 await ctx.send("Слово: " + r.word + " | " + "Значение: " + r.definition)
                 limit -= 1
 
+@bot.command(pass_context=True, aliases=['j', 'joi'])
+async def join(ctx):
+    channel = ctx.message.author.voice.channel
+    voice = get(bot.voice_clients, guild=ctx.guild)
+
+    if voice is not None:
+        return await voice.move_to(channel)
+
+    await channel.connect()
+    
+    await ctx.send(f"Бот присоединился в {channel}")
+
 bot.load_extension('cogs.musicbot')
 bot.run(os.environ['BOT_TOKEN'])

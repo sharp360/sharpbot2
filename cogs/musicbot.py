@@ -54,28 +54,10 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
 class Music(commands.Cog):
     def __init__(self, bot):
-        self.bot = bot
-
+        self.bot = bot 
+        
     @commands.command()
-    async def join(self, ctx, *, channel: discord.VoiceChannel):
-        """Joins a voice channel"""
-
-        if ctx.voice_client is not None:
-            return await ctx.voice_client.move_to(channel)
-
-        await channel.connect()
-
-    @commands.command()
-    async def play(self, ctx, *, query):
-        """Plays a file from the local filesystem"""
-
-        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query))
-        ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
-
-        await ctx.send('Now playing: {}'.format(query))
-
-    @commands.command()
-    async def yt(self, ctx, *, url):
+    async def play(self, ctx, *, url):
         """Plays from a url (almost anything youtube_dl supports)"""
 
         async with ctx.typing():
@@ -111,7 +93,6 @@ class Music(commands.Cog):
         await ctx.voice_client.disconnect()
 
     @play.before_invoke
-    @yt.before_invoke
     @stream.before_invoke
     async def ensure_voice(self, ctx):
         if ctx.voice_client is None:
