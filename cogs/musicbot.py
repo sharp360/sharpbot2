@@ -58,17 +58,20 @@ class Music(commands.Cog):
 
     @commands.command()
     async def play(self, ctx, *, url):
-        """Plays from a url (almost anything youtube_dl supports)"""
+
+        vc = ctx.voice_client
+
+        if not vc:
+            await ctx.invoke(ctx.connect_)
 
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop)
             ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
 
-        await ctx.send('Now playing: {}'.format(player.title))
+        await ctx.send('Проигрываю: {}'.format(player.title))
 
     @commands.command()
     async def stream(self, ctx, *, url):
-        """Streams from a url (same as yt, but doesn't predownload)"""
 
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
@@ -79,17 +82,15 @@ class Music(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def volume(self, ctx, volume: int):
-        """Changes the player's volume"""
 
         if ctx.voice_client is None:
-            return await ctx.send("Not connected to a voice channel.")
+            return await ctx.send("Бот не подключен к голосовому каналу.")
 
         ctx.voice_client.source.volume = volume / 100
-        await ctx.send("Changed volume to {}%".format(volume))
+        await ctx.send("Изменил громкость на {}%".format(volume))
 
     @commands.command()
     async def leave(self, ctx):
-        """Stops and disconnects the bot from voice"""
 
         await ctx.voice_client.disconnect()
 
@@ -100,8 +101,8 @@ class Music(commands.Cog):
             if ctx.author.voice:
                 await ctx.author.voice.channel.connect()
             else:
-                await ctx.send("You are not connected to a voice channel.")
-                raise commands.CommandError("Author not connected to a voice channel.")
+                await ctx.send("Вы не подключенны к голосовому каналу.")
+                raise commands.CommandError("Вы не подключенны к голосовому каналу.")
         elif ctx.voice_client.is_playing():
             ctx.voice_client.stop()
 
