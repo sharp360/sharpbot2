@@ -55,7 +55,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
 class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot 
-        
+
     @commands.command()
     async def play(self, ctx, *, url):
         """Plays from a url (almost anything youtube_dl supports)"""
@@ -77,6 +77,7 @@ class Music(commands.Cog):
         await ctx.send('Now playing: {}'.format(player.title))
 
     @commands.command()
+    @commands.is_owner()
     async def volume(self, ctx, volume: int):
         """Changes the player's volume"""
 
@@ -87,7 +88,7 @@ class Music(commands.Cog):
         await ctx.send("Changed volume to {}%".format(volume))
 
     @commands.command()
-    async def stop(self, ctx):
+    async def leave(self, ctx):
         """Stops and disconnects the bot from voice"""
 
         await ctx.voice_client.disconnect()

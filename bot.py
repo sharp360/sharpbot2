@@ -25,12 +25,40 @@ bot.remove_command('help')
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(status=discord.Status, activity=discord.Game('Команды /help'))
+    await bot.change_presence(status=discord.Status, activity=discord.Game('Команды $help'))
     print('Ебать работает')
 
 @bot.command()
 async def help(ctx):
-    await ctx.send("Доступные команды: /clear, /зачистка, /kick, /ban, /unban, /dice, /megadice, /coinflip, /invite, /join, /leave, /play, /pause, /stop")
+    embed = discord.Embed(title="Команды", color=0xa640cc)
+
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
+    
+    embed.add_field(name="$clear", value="Очистка сообщений", inline=True)
+    embed.add_field(name="$kick", value="Кик", inline=True)
+    embed.add_field(name="$ban", value="Бан", inline=True)
+    embed.add_field(name="$unban", value="Разбан", inline=True)
+    embed.add_field(name="$dice", value="Подбросить кости", inline=True)
+    embed.add_field(name="$coinflip", value="Подбросить монетку", inline=True)
+    embed.add_field(name="$invite", value="Пригласить бота на сервер", inline=True)
+    embed.add_field(name="$help_music", value="Команды музыкального бота", inline=True)
+    embed.add_field(name="$urbandic", value="Значение случайного слова с urbandictionary", inline=True)
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def help_music(ctx):
+    embed=discord.Embed(title="Команды музыкального бота", color=0xa640cc)
+
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
+
+    embed.add_field(name="$play (url)", value="Включить музыку", inline=True)
+    embed.add_field(name="$stream (url)", value="Включить музыку со стрима", inline=True)
+    embed.add_field(name="$join", value="Зайти в голосовой канал", inline=True)
+    embed.add_field(name="$leave", value="Выйти из голосового канала", inline=True)
+    embed.add_field(name="$pause", value="Поставить на паузу", inline=True)
+    embed.add_field(name="$unpause", value="Снять с паузы", inline=True)
+    embed.add_field(name="$volume", value="Изменить громкость", inline=True)
+    await ctx.bot.send(embed=embed)
 
 @bot.command()
 async def invite(ctx):
@@ -132,6 +160,28 @@ async def join(ctx):
     await channel.connect()
     
     await ctx.send(f"Бот присоединился в {channel}")
+
+@bot.command(pass_context=True)
+async def pause(ctx):
+
+    voice = get(bot.voice_clients, guild=ctx.guild)
+
+    if voice and voice.is_playing():
+        print("Пауза")
+        voice.pause()
+        await ctx.send("Музыка установлена на паузу")
+    else:
+        await ctx.send("Музыка не проигрываеться, не могу поставить на паузу")
+
+@bot.command(pass_context=True)
+async def unpause(ctx): 
+
+    voice = get(bot.voice_clients, guild=ctx.guild)
+    if voice and voice.is_paused():
+        voice.resume()
+        await ctx.send("Музыка снята с паузы")
+    else:
+        await ctx.send("Музыка уже проигрываеться, не могу снять с паузы")
 
 bot.load_extension('cogs.musicbot')
 bot.run(os.environ['BOT_TOKEN'])
