@@ -231,5 +231,5 @@ async def volume(ctx, volume: int):
     ctx.voice_client.source.volume = volume / 100
     await ctx.send(f"Изменил громкость на {volume}%")
 
-
+bot.load_extension('cogs.musicbot')
 bot.run(os.environ['BOT_TOKEN'])
