@@ -26,6 +26,14 @@ bot.remove_command('help')
 async def on_ready():
     await bot.change_presence(status=discord.Status, activity=discord.Game('Команды /help'))
     print('Ебать работает')
+
+@bot.command()
+@commands.is_owner()
+async def load(ctx, extension):
+    client.load_extension(f'cogs.{extension}')
+
+for filename in os.listdir('./cogs'):
+
     
 @bot.command()
 async def help(ctx):
@@ -231,5 +239,4 @@ async def volume(ctx, volume: int):
     await ctx.send(f"Изменил громкость на {volume}%")
 
 
-    
 bot.run(os.environ['BOT_TOKEN'])
