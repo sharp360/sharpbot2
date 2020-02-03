@@ -28,7 +28,7 @@ async def on_ready():
     await bot.change_presence(status=discord.Status, activity=discord.Game('Команды /help'))
     print('Ебать работает')
 
-for cog in os.listdir(".\\cogs"):
+for cog in os.listdir(".\cogs"):
         if cog.endswith(".py"):
             try:
                 print(cog)
