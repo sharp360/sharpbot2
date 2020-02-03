@@ -28,7 +28,7 @@ async def on_ready():
     await bot.change_presence(status=discord.Status, activity=discord.Game('Команды /help'))
     print('Ебать работает')
 
-initial_extensions = ['cogs.musicbot']
+initial_extensions = ['musicbot']
 
 if __name__ == '__main__':
     for extension in initial_extensions:
