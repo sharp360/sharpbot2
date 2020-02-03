@@ -57,7 +57,7 @@ class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot 
 
-    @commands.command()
+    @commands.command(aliases=['p'])
     async def play(self, ctx, *, url):
 
         channel = ctx.message.author.voice.channel
@@ -75,7 +75,7 @@ class Music(commands.Cog):
 
         await ctx.send('Проигрываю: {}'.format(player.title))
 
-    @commands.command()
+    @commands.command(aliases=['s'])
     async def stream(self, ctx, *, url):
 
         async with ctx.typing():
@@ -84,7 +84,7 @@ class Music(commands.Cog):
 
         await ctx.send('Now playing: {}'.format(player.title))
 
-    @commands.command()
+    @commands.command(aliases=['v'])
     @commands.is_owner()
     async def volume(self, ctx, volume: int):
 
@@ -94,7 +94,7 @@ class Music(commands.Cog):
         ctx.voice_client.source.volume = volume / 100
         await ctx.send("Изменил громкость на {}%".format(volume))
 
-    @commands.command()
+    @commands.command(aliases=['l'])
     async def leave(self, ctx):
 
         await ctx.voice_client.disconnect()

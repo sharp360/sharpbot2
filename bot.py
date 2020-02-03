@@ -149,7 +149,7 @@ async def urbandic(ctx):
                 await ctx.send("Слово: " + r.word + " | " + "Значение: " + r.definition)
                 limit -= 1
 
-@bot.command(pass_context=True, aliases=['j', 'joi'])
+@bot.command(pass_context=True, aliases=['j'])
 async def join(ctx):
     channel = ctx.message.author.voice.channel
     voice = get(bot.voice_clients, guild=ctx.guild)
