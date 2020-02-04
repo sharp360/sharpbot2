@@ -57,26 +57,26 @@ class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot 
 
-    @commands.command(aliases=['p'])
-    async def play(self, ctx, *, url):
-
-        channel = ctx.message.author.voice.channel
-        voice = get(bot.voice_clients, guild=ctx.guild)
-        vc = ctx.voice_client
-
-        if not vc:
-            return await voice.move_to(channel)
-
-
-
-        async with ctx.typing():
-            player = await YTDLSource.from_url(url, loop=self.bot.loop)
-            ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
-
-        await ctx.send('Проигрываю: {}'.format(player.title))
+#    @commands.command(aliases=['p'])
+#    async def play(self, ctx, *, url):
+#
+#        channel = ctx.message.author.voice.channel
+#        voice = get(bot.voice_clients, guild=ctx.guild)
+#        vc = ctx.voice_client
+#
+#        if not vc:
+#            return await voice.move_to(channel)
+#
+#
+#
+#        async with ctx.typing():
+#            player = await YTDLSource.from_url(url, loop=self.bot.loop)
+#            ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
+#
+#        await ctx.send('Проигрываю: {}'.format(player.title))
 
     @commands.command(aliases=['s'])
-    async def stream(self, ctx, *, url):
+    async def play(self, ctx, *, url):
         
         channel = ctx.message.author.voice.channel
         voice = get(bot.voice_clients, guild=ctx.guild)
@@ -107,7 +107,7 @@ class Music(commands.Cog):
         await ctx.voice_client.disconnect()
 
     @play.before_invoke
-    @stream.before_invoke
+#    @stream.before_invoke
     async def ensure_voice(self, ctx):
         if ctx.voice_client is None:
             if ctx.author.voice:
