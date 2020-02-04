@@ -52,7 +52,6 @@ async def help_music(ctx):
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
 
     embed.add_field(name="$play (url)", value="Включить музыку", inline=True)
-    embed.add_field(name="$stream (url)", value="Включить музыку со стрима", inline=True)
     embed.add_field(name="$join", value="Зайти в голосовой канал", inline=True)
     embed.add_field(name="$leave", value="Выйти из голосового канала", inline=True)
     embed.add_field(name="$pause", value="Поставить на паузу", inline=True)
