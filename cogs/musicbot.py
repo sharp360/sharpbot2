@@ -75,7 +75,7 @@ class Music(commands.Cog):
 #
 #        await ctx.send('Проигрываю: {}'.format(player.title))
 
-    @commands.command(aliases=['s'])
+    @commands.command(aliases=['p'])
     async def play(self, ctx, *, url):
         
         channel = ctx.message.author.voice.channel
