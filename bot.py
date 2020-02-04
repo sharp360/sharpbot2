@@ -183,5 +183,12 @@ async def unpause(ctx):
     else:
         await ctx.send("Музыка уже проигрываеться, не могу снять с паузы")
 
+@bot.command()
+async def avatar(self, ctx, *, user: discord.Member = None):
+    
+    user = user or ctx.author
+
+    await ctx.send(f"Avatar to **{user.name}**\n{user.avatar_url_as(size=1024)}")
+
 bot.load_extension('cogs.musicbot')
 bot.run(os.environ['BOT_TOKEN'])
