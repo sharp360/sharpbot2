@@ -63,34 +63,20 @@ async def help_music(ctx):
 async def invite(ctx):
     await ctx.send("https://bit.ly/2K6B5t4")
 
-#@bot.command()
-#@commands.has_permissions(manage_messages=True)
-#async def clear(ctx, amount: int):
-#    deleted = await ctx.channel.purge(limit=amount)
-#    embed = discord.Embed(
-#        title=(f"Удалено {len(deleted)} сообщений"),
-#        colour=discord.Colour.purple()
-#    )
-#  
-#    embed.set_image(url='https://cdn.discordapp.com/attachments/624937083605352469/635196301780320271/Dz-A-4aQgiY.jpg')
-#
-#    await ctx.send(embed=embed)
-
-@bot.command(name='clear', aliases=['clean'])
+@bot.command()
 @commands.has_permissions(manage_messages=True)
-async def clear(self, ctx, count: int):
-        if count > 50:
-            await ctx.send(f'Число сообщений не должно превышать {count}')
-        else:
-            deleted = await ctx.channel.purge(limit=count)
-            embed = discord.Embed(
-                title=(f"Удалено {len(deleted)} сообщений"),
-                colour=discord.Colour.purple()
-            )
+async def clear(ctx, amount: int):
+    if amount > 50:
+            await ctx.send(f'Число сообщений не должно превышать {amount}')
+    deleted = await ctx.channel.purge(limit=amount)
+    embed = discord.Embed(
+        title=(f"Удалено {len(deleted)} сообщений"),
+        colour=discord.Colour.purple()
+    )
   
-            embed.set_image(url='https://cdn.discordapp.com/attachments/624937083605352469/635196301780320271/Dz-A-4aQgiY.jpg')
+    embed.set_image(url='https://cdn.discordapp.com/attachments/624937083605352469/635196301780320271/Dz-A-4aQgiY.jpg')
 
-            await ctx.send(embed=embed)
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def ping(ctx):
