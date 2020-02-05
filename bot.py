@@ -68,15 +68,16 @@ async def invite(ctx):
 async def clear(ctx, amount: int):
     if amount > 50:
             await ctx.send(f'Число сообщений не должно превышать {amount}')
-    deleted = await ctx.channel.purge(limit=amount)
-    embed = discord.Embed(
-        title=(f"Удалено {len(deleted)} сообщений"),
-        colour=discord.Colour.purple()
-    )
-  
-    embed.set_image(url='https://cdn.discordapp.com/attachments/624937083605352469/635196301780320271/Dz-A-4aQgiY.jpg')
+    else:
+        deleted = await ctx.channel.purge(limit=amount)
+        embed = discord.Embed(
+            title=(f"Удалено {len(deleted)} сообщений"),
+            colour=discord.Colour.purple()
+        )
+    
+        embed.set_image(url='https://cdn.discordapp.com/attachments/624937083605352469/635196301780320271/Dz-A-4aQgiY.jpg')
 
-    await ctx.send(embed=embed)
+        await ctx.send(embed=embed)
 
 @bot.command()
 async def ping(ctx):
