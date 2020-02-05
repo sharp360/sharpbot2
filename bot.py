@@ -171,7 +171,7 @@ async def unpause(ctx):
     else:
         await ctx.send("Музыка уже проигрываеться, не могу снять с паузы")
 
-@bot.command()
+@bot.command(aliases=['s'])
 @commands.is_owner()
 async def say(ctx, *, arg):
     await ctx.channel.purge(limit=1)
