@@ -76,7 +76,7 @@ async def invite(ctx):
 #
 #    await ctx.send(embed=embed)
 
-@bot.command(name='clear', aliases=['clean', 'clear', 'clearchat'])
+@bot.command(name='clear', aliases=['clean'])
 @commands.has_permissions(manage_messages=True)
 async def clear(self, ctx, count: int):
         if count > 50:
@@ -186,13 +186,7 @@ async def unpause(ctx):
         await ctx.send("Музыка уже проигрываеться, не могу снять с паузы")
 
 @bot.command()
-async def avatar(self, ctx, *, user: discord.Member = None):
-    
-    user = user or ctx.author
-
-    await ctx.send(f"Avatar to **{user.name}**\n{user.avatar_url_as(size=1024)}")
-
-@bot.command()
+@commands.is_owner()
 async def say(ctx, *, arg):
     await ctx.channel.purge(limit=1)
     await ctx.send(arg)
