@@ -65,10 +65,11 @@ async def invite(ctx):
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
-async def clear(ctx, amount: int + 1):
+async def clear(ctx, amount: int):
     if amount > 50:
             await ctx.send(f'Число сообщений не должно превышать 50 сообщений')
     else:
+        time.sleep(3)
         deleted = await ctx.channel.purge(limit=amount)
         embed = discord.Embed(
             title=(f"Удалено {len(deleted)} сообщений"),
