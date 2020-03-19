@@ -65,7 +65,7 @@ async def invite(ctx):
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
-async def clear(ctx, amount: int):
+async def clear(ctx, amount: int + 1):
     if amount > 50:
             await ctx.send(f'Число сообщений не должно превышать 50 сообщений')
     else:
