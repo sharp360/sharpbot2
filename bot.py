@@ -70,7 +70,6 @@ async def clear(ctx, amount: int):
             await ctx.send(f'Число сообщений не должно превышать 50 сообщений')
     else:
         deleted = await ctx.channel.purge(limit=amount)
-        time.sleep(3)
         embed = discord.Embed(
             title=(f"Удалено {len(deleted)} сообщений"),
             colour=discord.Colour.purple()
