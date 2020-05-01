@@ -144,5 +144,5 @@ async def say(ctx, *, arg):
     await ctx.channel.purge(limit=1)
     await ctx.send(arg)
 
-bot.load_extension('cogs.musicbot2')
+bot.load_extension('cogs.musicbot')
 bot.run(os.environ['BOT_TOKEN'])
