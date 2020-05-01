@@ -22,7 +22,7 @@ if not discord.opus.is_loaded():
 #client = commands.Bot(command_prefix = '/')
 bot = commands.Bot(command_prefix = '$')
 bot.remove_command('help')
-initial_extensions = ['cogs.music']
+initial_extensions = ['cogs.musicbot']
 if __name__ == '__main__':
     for extension in initial_extensions:
         bot.load_extension(extension)
