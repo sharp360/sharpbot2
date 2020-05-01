@@ -150,7 +150,7 @@ async def join(ctx):
     
     await ctx.send(f"Бот присоединился в {channel}")
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True, aliases=['stop, p'])
 async def pause(ctx):
 
     voice = get(bot.voice_clients, guild=ctx.guild)
