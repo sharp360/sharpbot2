@@ -157,9 +157,6 @@ class SongQueue(asyncio.Queue):
         else:
             return self._queue[item]
 
-    def __iter__(self):
-        return self._queue.__iter__()
-
     def __len__(self):
         return self.qsize()
 
