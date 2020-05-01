@@ -138,11 +138,45 @@ async def urbandic(ctx):
                 await ctx.send("Слово: " + r.word + " | " + "Значение: " + r.definition)
                 limit -= 1
 
+@bot.command(pass_context=True, aliases=['j'])
+async def join(ctx):
+    channel = ctx.message.author.voice.channel
+    voice = get(bot.voice_clients, guild=ctx.guild)
+
+    if voice is not None:
+        return await voice.move_to(channel)
+
+    await channel.connect()
+    
+    await ctx.send(f"Бот присоединился в {channel}")
+
+@bot.command(pass_context=True, aliases=['stop, p'])
+async def pause(ctx):
+
+    voice = get(bot.voice_clients, guild=ctx.guild)
+
+    if voice and voice.is_playing():
+        print("Пауза")
+        voice.pause()
+        await ctx.send("Музыка установлена на паузу")
+    else:
+        await ctx.send("Музыка не проигрываеться, не могу поставить на паузу")
+
+@bot.command(pass_context=True)
+async def unpause(ctx): 
+
+    voice = get(bot.voice_clients, guild=ctx.guild)
+    if voice and voice.is_paused():
+        voice.resume()
+        await ctx.send("Музыка снята с паузы")
+    else:
+        await ctx.send("Музыка уже проигрываеться, не могу снять с паузы")
+
 @bot.command(aliases=['s'])
 @commands.is_owner()
 async def say(ctx, *, arg):
     await ctx.channel.purge(limit=1)
     await ctx.send(arg)
 
-bot.load_extension('musicbot')
+bot.load_extension('cogs.musicbot')
 bot.run(os.environ['BOT_TOKEN'])
