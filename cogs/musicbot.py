@@ -291,7 +291,7 @@ class Music(commands.Cog):
         upcoming = list(itertools.islice(player.queue._queue, 0, 5))
 
         fmt = '\n'.join(f'**`{_["title"]}`**' for _ in upcoming)
-        embed = discord.Embed(title=f'Следующая песня {len(upcoming)}', description=fmt)
+        embed = discord.Embed(title=f'Песен в плейлисте {len(upcoming)}', description=fmt)
 
         await ctx.send(embed=embed)
 
