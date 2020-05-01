@@ -22,6 +22,10 @@ if not discord.opus.is_loaded():
 #client = commands.Bot(command_prefix = '/')
 bot = commands.Bot(command_prefix = '$')
 bot.remove_command('help')
+initial_extensions = ['cogs.music']
+if __name__ == '__main__':
+    for extension in initial_extensions:
+        bot.load_extension(extension)
 
 @bot.event
 async def on_ready():
@@ -137,40 +141,6 @@ async def urbandic(ctx):
             while limit != 0:
                 await ctx.send("Слово: " + r.word + " | " + "Значение: " + r.definition)
                 limit -= 1
-
-@bot.command(pass_context=True, aliases=['j'])
-async def join(ctx):
-    channel = ctx.message.author.voice.channel
-    voice = get(bot.voice_clients, guild=ctx.guild)
-
-    if voice is not None:
-        return await voice.move_to(channel)
-
-    await channel.connect()
-    
-    await ctx.send(f"Бот присоединился в {channel}")
-
-@bot.command(pass_context=True)
-async def pause(ctx):
-
-    voice = get(bot.voice_clients, guild=ctx.guild)
-
-    if voice and voice.is_playing():
-        print("Пауза")
-        voice.pause()
-        await ctx.send("Музыка установлена на паузу")
-    else:
-        await ctx.send("Музыка не проигрываеться, не могу поставить на паузу")
-
-@bot.command(pass_context=True)
-async def unpause(ctx): 
-
-    voice = get(bot.voice_clients, guild=ctx.guild)
-    if voice and voice.is_paused():
-        voice.resume()
-        await ctx.send("Музыка снята с паузы")
-    else:
-        await ctx.send("Музыка уже проигрываеться, не могу снять с паузы")
 
 @bot.command(aliases=['s'])
 @commands.is_owner()
