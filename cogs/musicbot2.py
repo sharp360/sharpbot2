@@ -5,9 +5,12 @@ import asyncio
 import itertools
 import sys
 import traceback
+import youtube_dl
 from async_timeout import timeout
 from functools import partial
 from youtube_dl import YoutubeDL
+
+youtube_dl.utils.bug_reports_message = lambda: ''
 
 
 ytdlopts = {
@@ -390,6 +393,13 @@ class Music:
 
         await self.cleanup(ctx.guild)
 
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("$"),
+                   description='Relatively simple music bot example')
+
+@bot.event
+async def on_ready():
+    print('Logged in as {0} ({0.id})'.format(bot.user))
+    print('------')
 
 def setup(bot):
     bot.add_cog(Music(bot))
