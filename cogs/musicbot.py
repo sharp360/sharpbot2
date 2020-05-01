@@ -402,4 +402,4 @@ async def on_ready():
     print('------')
 
 def setup(bot):
-    bot.add_cog(Music(bot))
+    bot.add_cog(musicbot)
