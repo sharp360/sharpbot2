@@ -55,12 +55,18 @@ async def help_music(ctx):
 
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
 
-    embed.add_field(name="$play (url)", value="Включить музыку", inline=True)
-    embed.add_field(name="$join", value="Зайти в голосовой канал", inline=True)
-    embed.add_field(name="$leave", value="Выйти из голосового канала", inline=True)
+    embed.add_field(name="$play (url)", value="Включить музыку(Alias =$connect)", inline=True)
+    embed.add_field(name="$join", value="Зайти в голосовой канал(Alias =$p)", inline=True)
+    embed.add_field(name="$leave", value="Выйти из голосового канала(Alias =$l)", inline=True)
     embed.add_field(name="$pause", value="Поставить на паузу", inline=True)
-    embed.add_field(name="$unpause", value="Снять с паузы", inline=True)
-    embed.add_field(name="$volume", value="Изменить громкость", inline=True)
+    embed.add_field(name="$stop", value="Выключить музыку", inline=True)
+    embed.add_field(name="$unpause", value="Снять с паузы(Alias =$resume)", inline=True)
+    embed.add_field(name="$volume", value="Изменить громкость(Alias =$)", inline=True)
+    embed.add_field(name="$skip", value="Скипнуть песню", inline=True)
+    embed.add_field(name="$playlist", value="Список музыки в плейлисте", inline=True)
+    embed.add_field(name="$currentsong", value="Музыка которая проигрывается в данный момент(Alias =$np)", inline=True)
+    embed.add_field(name="$volume", value="Изменить громкость(Alias =$vol)", inline=True)
+
     await ctx.send(embed=embed)
 
 @bot.command()
