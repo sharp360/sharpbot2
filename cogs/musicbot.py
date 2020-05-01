@@ -401,5 +401,4 @@ async def on_ready():
     print('Logged in as {0} ({0.id})'.format(bot.user))
     print('------')
 
-def setup(bot):
-    bot.add_cog(Music(bot))
+bot.add_cog(Music(bot))
