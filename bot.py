@@ -61,7 +61,6 @@ async def help_music(ctx):
     embed.add_field(name="$pause", value="Поставить на паузу", inline=True)
     embed.add_field(name="$stop", value="Выключить музыку", inline=True)
     embed.add_field(name="$unpause", value="Снять с паузы(Alias =$resume)", inline=True)
-    embed.add_field(name="$volume", value="Изменить громкость(Alias =$)", inline=True)
     embed.add_field(name="$skip", value="Скипнуть песню", inline=True)
     embed.add_field(name="$playlist", value="Список музыки в плейлисте", inline=True)
     embed.add_field(name="$currentsong", value="Музыка которая проигрывается в данный момент(Alias =$np)", inline=True)
