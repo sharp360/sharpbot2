@@ -15,4 +15,3 @@ ffmpeg
 PyNaCl
 urbandictionary
 spotdl
-ytdl
