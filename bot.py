@@ -84,7 +84,7 @@ async def clear(ctx, amount: int):
             colour=discord.Colour.purple()
         )
     
-        embed.set_image(url='https://cdn.discordapp.com/attachments/443445916381216769/733427366839320657/video0.mp4')
+        embed.set_image(url='https://cdn.discordapp.com/attachments/733428041501638696/733435752678948884/maxresdefault.png')
 
         await ctx.send(embed=embed)
 
