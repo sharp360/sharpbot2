@@ -84,9 +84,9 @@ async def clear(ctx, amount: int):
             colour=discord.Colour.purple()
         )
     
-        embed.set_image(url='https://cdn.discordapp.com/attachments/733428041501638696/733435752678948884/maxresdefault.png')
+        embed.set_image(url='https://images-ext-2.discordapp.net/external/iNUSwqRS_5uayhN_Ll-L77uMw3DmfbmxjGiQHW2SPfs/https/images-ext-1.discordapp.net/external/gBJyiZcKW6r9rmZEkB20m-cLOda3C2u1IDGeQ959mwc/https/media.discordapp.net/attachments/296056831514509312/724331512761286677/image0.gif')
 
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed, delete_after=20)
 
 @bot.command()
 async def ping(ctx):
