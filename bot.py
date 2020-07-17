@@ -153,4 +153,8 @@ async def say(ctx, *, arg):
     await ctx.channel.purge(limit=1)
     await ctx.send(arg)
 
+@bot.command(pass_context=True)
+async def botservers(ctx):
+    await ctx.send("I'm in " + str(len(ctx.guild)) + " servers")
+
 bot.run(os.environ['BOT_TOKEN'])
