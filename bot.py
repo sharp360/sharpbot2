@@ -100,13 +100,13 @@ async def ping(ctx):
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
-    await ctx.send(f'{member.mention} Подсрачником отправлен в Украину')
+    await ctx.send(f'{member.mention} Кикнут')
 
 @bot.command()
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason=reason)
-    await ctx.send(f'{member.mention} Был заблокирован')
+    await ctx.send(f'{member.mention} Забанен')
 
 @bot.command()
 @commands.has_permissions(ban_members=True)
@@ -119,12 +119,12 @@ async def unban(ctx, *, member):
 
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
-            await ctx.send(f'{user.mention} Был разбанен')
+            await ctx.send(f'{user.mention} Разбанен')
             return
 
 @bot.command()
 async def dice(ctx):
-    responses = ['1', '2', '3', '4', '5', '6', 'пошел нахуй']
+    responses = ['1', '2', '3', '4', '5', '6']
     await ctx.send(random.choice(responses))
 
 @bot.command()
