@@ -33,7 +33,7 @@ async def on_ready():
     await bot.wait_until_ready()
     await bot.change_presence(activity=Activity(name=f"{len(bot.guilds)} servers", 
                                                 type=ActivityType.watching))
-    print('Ебать работает')
+    print('Ебать работаит')
 
 @bot.command()
 async def help(ctx):
