@@ -7,6 +7,7 @@ from discord.utils import get
 import youtube_dl
 from discord.ext import commands, tasks
 from discord import Member
+from discord import Activity, ActivityType
 from discord.ext.commands import has_permissions, MissingPermissions
 from itertools import cycle
 import time
@@ -29,7 +30,9 @@ if __name__ == '__main__':
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(status=discord.Status, activity=discord.Game('Команды $help'))
+    await bot.wait_until_ready()
+    await bot.change_presence(activity=Activity(name=f"{len(bot.guilds)} servers", 
+                                                type=ActivityType.watching))
     print('Ебать работает')
 
 @bot.command()
@@ -153,8 +156,5 @@ async def say(ctx, *, arg):
     await ctx.channel.purge(limit=1)
     await ctx.send(arg)
 
-@bot.command(pass_context=True)
-async def botservers(ctx):
-    await ctx.send("I'm in " + (ctx.guild) + " servers")
 
 bot.run(os.environ['BOT_TOKEN'])
