@@ -16,4 +16,11 @@ PyNaCl
 urbandictionary
 spotdl
 youtube_dl
-logging
+colour
+discord.webhooks
+psutil
+lxml
+python_dateuti
+PythonGists
+pytz
+spice_api
