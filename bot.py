@@ -82,6 +82,22 @@ async def ping(ctx):
     await ctx.send(latency)
 
 @bot.command()
+@commands.has_permissions(manage_messages=True)
+async def clear(ctx, amount: int):
+    if amount > 50:
+            await ctx.send(f'Число сообщений не должно превышать 50 сообщений')
+    else:
+        deleted = await ctx.channel.purge(limit=amount)
+        embed = discord.Embed(
+            title=(f"Удалено {len(deleted)} сообщений"),
+            colour=discord.Colour.purple()
+        )
+
+        embed.set_image(url='https://images-ext-2.discordapp.net/external/iNUSwqRS_5uayhN_Ll-L77uMw3DmfbmxjGiQHW2SPfs/https/images-ext-1.discordapp.net/external/gBJyiZcKW6r9rmZEkB20m-cLOda3C2u1IDGeQ959mwc/https/media.discordapp.net/attachments/296056831514509312/724331512761286677/image0.gif')
+
+        await ctx.send(embed=embed, delete_after=20)
+
+@bot.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
