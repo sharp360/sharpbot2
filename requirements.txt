@@ -16,3 +16,4 @@ PyNaCl
 urbandictionary
 spotdl
 youtube_dl
+logging
