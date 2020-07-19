@@ -16,7 +16,6 @@ PyNaCl
 urbandictionary
 spotdl
 youtube_dl
-colour
 psutil
 lxml
 python_dateuti
