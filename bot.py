@@ -24,6 +24,7 @@ if not discord.opus.is_loaded():
 bot = commands.Bot(command_prefix = '$')
 bot.remove_command('help')
 initial_extensions = ['cogs.musicbot']
+initial_extensions = ['cogs.owner']
 if __name__ == '__main__':
     for extension in initial_extensions:
         bot.load_extension(extension)
@@ -75,21 +76,6 @@ async def help_music(ctx):
 async def invite(ctx):
     await ctx.send("https://bit.ly/2K6B5t4")
 
-@bot.command()
-@commands.has_permissions(manage_messages=True)
-async def clear(ctx, amount: int):
-    if amount > 50:
-            await ctx.send(f'Число сообщений не должно превышать 50 сообщений')
-    else:
-        deleted = await ctx.channel.purge(limit=amount)
-        embed = discord.Embed(
-            title=(f"Удалено {len(deleted)} сообщений"),
-            colour=discord.Colour.purple()
-        )
-    
-        embed.set_image(url='https://images-ext-2.discordapp.net/external/iNUSwqRS_5uayhN_Ll-L77uMw3DmfbmxjGiQHW2SPfs/https/images-ext-1.discordapp.net/external/gBJyiZcKW6r9rmZEkB20m-cLOda3C2u1IDGeQ959mwc/https/media.discordapp.net/attachments/296056831514509312/724331512761286677/image0.gif')
-
-        await ctx.send(embed=embed, delete_after=20)
 
 @bot.command()
 async def ping(ctx):
