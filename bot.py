@@ -86,6 +86,8 @@ async def ping(ctx):
 async def clear(ctx, amount: int):
     if amount > 50:
             await ctx.send(f'Число сообщений не должно превышать 50 сообщений')
+    elif amount == 1:
+            await ctx.send(f'Удалено 1 сообщение')
     else:
         deleted = await ctx.channel.purge(limit=amount)
         embed = discord.Embed(
