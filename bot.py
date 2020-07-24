@@ -37,12 +37,8 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
-<<<<<<< HEAD
     embed = discord.Embed(title="Bot commands", color=0xa640cc)
-=======
-    print("$help")
-    embed = discord.Embed(title="Команды", color=0xa640cc)
->>>>>>> ec34255b8f7318969cd6674a23ef1a9bd34eef56
+
 
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
     
@@ -59,12 +55,7 @@ async def help(ctx):
 
 @bot.command()
 async def help_music(ctx):
-<<<<<<< HEAD
     embed=discord.Embed(title="Music bot commands", color=0xa640cc)
-=======
-    print("$help_music")
-    embed=discord.Embed(title="Команды музыкального бота", color=0xa640cc)
->>>>>>> ec34255b8f7318969cd6674a23ef1a9bd34eef56
 
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
 
@@ -156,7 +147,8 @@ async def megadice(ctx):
 
 @bot.command()
 async def coinflip(ctx):
-    coin = ['Heads','Tails']
+    print("$coinflip")
+    coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
 @bot.command(aliases=['ud'])
