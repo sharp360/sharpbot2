@@ -180,8 +180,7 @@ class Music(commands.Cog):
             except discord.HTTPException:
                 pass
         elif isinstance(error, InvalidVoiceChannel):
-            await ctx.send('Cant join vc. '
-                           Make sure you're in vc.")
+            await ctx.send('Cant join vc.')
 
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
