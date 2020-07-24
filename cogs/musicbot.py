@@ -66,7 +66,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
             # take first item from a playlist
             data = data['entries'][0]
 
-        await ctx.send(f'```ini\n[Добавил {data["title"]} в плейлист.]\n```', delete_after=15)
+        await ctx.send(f'```ini\n[Added {data["title"]} to queue.]\n```', delete_after=15)
 
         if download:
             source = ytdl.prepare_filename(data)
@@ -176,12 +176,12 @@ class Music(commands.Cog):
     async def __error(self, ctx, error):
         if isinstance(error, commands.NoPrivateMessage):
             try:
-                return await ctx.send('Пашол нахуй, это для сервера команда.')
+                return await ctx.send('Слава украине.')
             except discord.HTTPException:
                 pass
         elif isinstance(error, InvalidVoiceChannel):
-            await ctx.send('Ошибка подключения к голосовому каналу. '
-                           'Убедитесь что вы не в закрытом голосовом канале.')
+            await ctx.send('Cant join vc. '
+                           Make sure you're in vc.")
 
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
@@ -218,7 +218,7 @@ class Music(commands.Cog):
             except asyncio.TimeoutError:
                 raise VoiceConnectionError(f'Подключаюсь к каналу: <{channel}> t/o.')
 
-        await ctx.send(f'Бот подключен к: **{channel}**', delete_after=20)
+        await ctx.send(f'Connected: **{channel}**', delete_after=20)
 
     @commands.command(name='play', aliases=['p'])
     async def play_(self, ctx, *, search: str):
@@ -242,31 +242,31 @@ class Music(commands.Cog):
         vc = ctx.voice_client
 
         if not vc or not vc.is_playing():
-            return await ctx.send('Бот сейчас ничего не проигрывает.', delete_after=20)
+            return await ctx.send("Cant pause.", delete_after=20)
         elif vc.is_paused():
             return
 
         vc.pause()
-        await ctx.send(f'**`{ctx.author}`**: Установил музыку на паузу.')
+        await ctx.send(f'**`{ctx.author}`**: Paused the song.')
 
     @commands.command(name='resume', aliases=['unpause'])
     async def resume_(self, ctx):
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('В данный момент бот ничего не проигрывает.', delete_after=20)
+            return await ctx.send('Bot is not playing anything rn.', delete_after=20)
         elif not vc.is_paused():
             return
 
         vc.resume()
-        await ctx.send(f'**`{ctx.author}`**: Снял музыку с паузы.')
+        await ctx.send(f'**`{ctx.author}`**: Unpaused.')
 
     @commands.command(name='skip')
     async def skip_(self, ctx):
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('В данный момент бот ничего не проигрывает.', delete_after=20)
+            return await ctx.send('Bot is not playing anything rn.', delete_after=20)
 
         if vc.is_paused():
             pass
@@ -274,18 +274,18 @@ class Music(commands.Cog):
             return
 
         vc.stop()
-        await ctx.send(f'**`{ctx.author}`**: Скипнул песню.')
+        await ctx.send(f'**`{ctx.author}`**: Skipped song.')
 
     @commands.command(name='queue', aliases=['q', 'playlist'])
     async def queue_info(self, ctx):
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('Бот не подключен к голосовому каналу.', delete_after=20)
+            return await ctx.send('Bot is not connected to vc.', delete_after=20)
 
         player = self.get_player(ctx)
         if player.queue.empty():
-            return await ctx.send('Пусто')
+            return await ctx.send('Empty')
 
         # Grab up to 5 entries from the queue...
         upcoming = list(itertools.islice(player.queue._queue, 0, 5))
@@ -300,11 +300,11 @@ class Music(commands.Cog):
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('Бот не подключен к голосовому каналу.', delete_after=20)
+            return await ctx.send('Not connected to vc.', delete_after=20)
 
         player = self.get_player(ctx)
         if not player.current:
-            return await ctx.send('В данный момемент бот ничего не проигрывает.')
+            return await ctx.send('Not playing anything rn')
 
         try:
             # Remove our previous now_playing message.
@@ -312,18 +312,18 @@ class Music(commands.Cog):
         except discord.HTTPException:
             pass
 
-        player.np = await ctx.send(f'**Сейчас Проигрываю:** `{vc.source.title}` '
-                                   f'запрошенный `{vc.source.requester}`')
+        player.np = await ctx.send(f'**Playing:** `{vc.source.title}` '
+                                   f'Requested by: `{vc.source.requester}`')
 
     @commands.command(name='volume', aliases=['vol'])
     async def change_volume(self, ctx, *, vol: float):
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('Бот не подключен к голосовому каналу.', delete_after=20)
+            return await ctx.send('Bot is not connected to vc.', delete_after=20)
 
         if not 0 < vol < 101:
-            return await ctx.send('Пожалуйста, укажите число от 1 до 100.')
+            return await ctx.send('Use numbers between 1 and 100.')
 
         player = self.get_player(ctx)
 
@@ -331,14 +331,14 @@ class Music(commands.Cog):
             vc.source.volume = vol / 100
 
         player.volume = vol / 100
-        await ctx.send(f'**`{ctx.author}`**: Громкость установлена на **{vol}%**')
+        await ctx.send(f'**`{ctx.author}`**: Volume set to: **{vol}%**')
 
     @commands.command(name='stop')
     async def stop_(self, ctx):
         vc = ctx.voice_client
 
         if not vc or not vc.is_connected():
-            return await ctx.send('Бот сейчас ничего не проигрывает.', delete_after=20)
+            return await ctx.send('Bot is not playing anything rn.', delete_after=20)
 
         await self.cleanup(ctx.guild)
 
