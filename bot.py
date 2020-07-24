@@ -37,6 +37,7 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
+    print("$help")
     embed = discord.Embed(title="Команды", color=0xa640cc)
 
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
@@ -54,6 +55,7 @@ async def help(ctx):
 
 @bot.command()
 async def help_music(ctx):
+    print("$help_music")
     embed=discord.Embed(title="Команды музыкального бота", color=0xa640cc)
 
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
@@ -73,17 +75,20 @@ async def help_music(ctx):
 
 @bot.command()
 async def invite(ctx):
+    print("$invite")
     await ctx.send("https://bit.ly/2K6B5t4")
 
 
 @bot.command()
 async def ping(ctx):
+    print("$ping")
     latency = bot.latency
     await ctx.send(latency)
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount: int):
+    print("$clear")
     if amount > 50:
             await ctx.send(f'Число сообщений не должно превышать 50 сообщений')
     else:
@@ -100,18 +105,21 @@ async def clear(ctx, amount: int):
 @bot.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
+    print("$kick")
     await member.kick(reason=reason)
     await ctx.send(f'{member.mention} Кикнут')
 
 @bot.command()
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member, *, reason=None):
+    print("$ban")
     await member.ban(reason=reason)
     await ctx.send(f'{member.mention} Забанен')
 
 @bot.command()
 @commands.has_permissions(ban_members=True)
 async def unban(ctx, *, member):
+    print("$unban")
     banned_users = await ctx.guild.bans()
     member_name, member_discriminator = member.split('#')
 
@@ -125,11 +133,13 @@ async def unban(ctx, *, member):
 
 @bot.command()
 async def dice(ctx):
+    print("$dice")
     responses = ['1', '2', '3', '4', '5', '6']
     await ctx.send(random.choice(responses))
 
 @bot.command()
 async def megadice(ctx):
+    print("$megadice")
     responsus = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33',
                  '34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64',
                  '65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95',
@@ -138,6 +148,7 @@ async def megadice(ctx):
 
 @bot.command()
 async def coinflip(ctx):
+    print("$coinflip")
     coin = ['Орел','Решка']
     await ctx.send(random.choice(coin))
 
