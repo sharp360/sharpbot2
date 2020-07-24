@@ -37,37 +37,37 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
-    embed = discord.Embed(title="Команды", color=0xa640cc)
+    embed = discord.Embed(title="Bot commands", color=0xa640cc)
 
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
     
-    embed.add_field(name="$clear", value="Очистка сообщений", inline=True)
-    embed.add_field(name="$kick", value="Кик", inline=True)
-    embed.add_field(name="$ban", value="Бан", inline=True)
-    embed.add_field(name="$unban", value="Разбан", inline=True)
-    embed.add_field(name="$dice", value="Подбросить кости", inline=True)
-    embed.add_field(name="$coinflip", value="Подбросить монетку", inline=True)
-    embed.add_field(name="$invite", value="Пригласить бота на сервер", inline=True)
-    embed.add_field(name="$urbandic", value="Значение случайного слова с urbandictionary", inline=True)
-    embed.add_field(name="$help_music", value="Команды музыкального бота", inline=True)
+    embed.add_field(name="$clear", value="Clear messages", inline=True)
+    embed.add_field(name="$kick", value="Kick", inline=True)
+    embed.add_field(name="$ban", value="Ban", inline=True)
+    embed.add_field(name="$unban", value="Unban", inline=True)
+    embed.add_field(name="$dice", value="Dice", inline=True)
+    embed.add_field(name="$coinflip", value="Coinflip", inline=True)
+    embed.add_field(name="$invite", value="Bot invite link", inline=True)
+    embed.add_field(name="$urbandic", value="Random definition from urbandictionary.com", inline=True)
+    embed.add_field(name="$help_music", value="Music bot commands", inline=True)
     await ctx.send(embed=embed)
 
 @bot.command()
 async def help_music(ctx):
-    embed=discord.Embed(title="Команды музыкального бота", color=0xa640cc)
+    embed=discord.Embed(title="Music bot commands", color=0xa640cc)
 
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
 
-    embed.add_field(name="$play (url)", value="Включить музыку(Alias =$p)", inline=True)
-    embed.add_field(name="$join", value="Зайти в голосовой канал(Alias =$connect", inline=True)
-    embed.add_field(name="$leave", value="Выйти из голосового канала(Alias =$l)", inline=True)
-    embed.add_field(name="$pause", value="Поставить на паузу", inline=True)
-    embed.add_field(name="$stop", value="Выключить музыку", inline=True)
-    embed.add_field(name="$unpause", value="Снять с паузы(Alias =$resume)", inline=True)
-    embed.add_field(name="$skip", value="Скипнуть песню", inline=True)
-    embed.add_field(name="$playlist", value="Список музыки в плейлисте", inline=True)
-    embed.add_field(name="$currentsong", value="Музыка которая проигрывается в данный момент(Alias =$np)", inline=True)
-    embed.add_field(name="$volume", value="Изменить громкость(Alias =$vol)", inline=True)
+    embed.add_field(name="$play (url)", value="Play a song(Alias =$p)", inline=True)
+    embed.add_field(name="$join", value="Join voice channel(Alias =$connect", inline=True)
+    embed.add_field(name="$leave", value="Leave voice channel(Alias =$l)", inline=True)
+    embed.add_field(name="$pause", value="Pause a song", inline=True)
+    embed.add_field(name="$stop", value="Stop a song(disconnects bot from VC)", inline=True)
+    embed.add_field(name="$unpause", value="Unpause(Alias =$resume)", inline=True)
+    embed.add_field(name="$skip", value="Skip a song", inline=True)
+    embed.add_field(name="$playlist", value="View song playlist", inline=True)
+    embed.add_field(name="$currentsong", value="Current playing song(Alias =$np)", inline=True)
+    embed.add_field(name="$volume", value="Change volume(Alias =$vol)", inline=True)
 
     await ctx.send(embed=embed)
 
@@ -85,11 +85,11 @@ async def ping(ctx):
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount: int):
     if amount > 50:
-            await ctx.send(f'Число сообщений не должно превышать 50 сообщений')
+            await ctx.send(f'Message ammount should not be more than 50')
     else:
         deleted = await ctx.channel.purge(limit=amount)
         embed = discord.Embed(
-            title=(f"Удалено {len(deleted)} сообщений"),
+            title=(f"Deleted {len(deleted)} messages"),
             colour=discord.Colour.purple()
         )
 
@@ -101,13 +101,13 @@ async def clear(ctx, amount: int):
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
-    await ctx.send(f'{member.mention} Кикнут')
+    await ctx.send(f'{member.mention} was kicked')
 
 @bot.command()
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason=reason)
-    await ctx.send(f'{member.mention} Забанен')
+    await ctx.send(f'{member.mention} was banned')
 
 @bot.command()
 @commands.has_permissions(ban_members=True)
@@ -120,7 +120,7 @@ async def unban(ctx, *, member):
 
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
-            await ctx.send(f'{user.mention} Разбанен')
+            await ctx.send(f'{user.mention} was unbanned')
             return
 
 @bot.command()
@@ -138,14 +138,14 @@ async def megadice(ctx):
 
 @bot.command()
 async def coinflip(ctx):
-    coin = ['Орел','Решка']
+    coin = ['Heads','Tails']
     await ctx.send(random.choice(coin))
 
 @bot.command(aliases=['ud'])
 async def urbandic(ctx):
         ran = urbandictionary.random()
         limit = 1
-        print("Запрашиваю случайное слово и значение с сайта urbandictionary.com.")
+        print("Random definition from urbandictionary.com")
         for r in ran:
             while limit != 0:
                 await ctx.send("Слово: " + r.word + " | " + "Значение: " + r.definition)
