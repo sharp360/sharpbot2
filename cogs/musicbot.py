@@ -131,7 +131,7 @@ class MusicPlayer:
             self.current = source
 
             self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
-            self.np = await self._channel.send(f'**Сейчас Проигрываю:** `{source.title}` запрошенный '
+            self.np = await self._channel.send(f'**Now playing:** `{source.title}` requested by '
                                                f'`{source.requester}`')
             await self.next.wait()
 
@@ -200,7 +200,7 @@ class Music(commands.Cog):
             try:
                 channel = ctx.author.voice.channel
             except AttributeError:
-                raise InvalidVoiceChannel('Зайдите в голосовой канал перед подключение бота.')
+                raise InvalidVoiceChannel('Join vc before connecting bot to vc.')
 
         vc = ctx.voice_client
 
