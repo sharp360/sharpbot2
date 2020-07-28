@@ -210,12 +210,12 @@ class Music(commands.Cog):
             try:
                 await vc.move_to(channel)
             except asyncio.TimeoutError:
-                raise VoiceConnectionError(f'Подключаюсь к каналу: <{channel}> t/o.')
+                raise VoiceConnectionError(f'Connecting to voice channel: <{channel}> t/o.')
         else:
             try:
                 await channel.connect()
             except asyncio.TimeoutError:
-                raise VoiceConnectionError(f'Подключаюсь к каналу: <{channel}> t/o.')
+                raise VoiceConnectionError(f'Connecting to voice channel: <{channel}> t/o.')
 
         await ctx.send(f'Connected: **{channel}**', delete_after=20)
 
