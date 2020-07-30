@@ -345,7 +345,6 @@ class Music(commands.Cog):
     async def leave(self, ctx):
 
         await ctx.voice_client.disconnect()
-        await self.cleanup(ctx.guild)
 
 
 def setup(bot):
