@@ -3,7 +3,7 @@ websockets
 asyncio
 beautifulsoup4
 asyncpg
-requests
+requests==2.21.0
 dhooks
 aiohttp
 git+https://github.com/Rapptz/discord.py
