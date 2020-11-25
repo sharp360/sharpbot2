@@ -42,6 +42,7 @@ async def help(ctx):
 
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/605243405622181912/673959848219770930/esdsfodifsdpdonpdkee.png")
     
+    embed.add_field(name="шараб#2415", value="Contact me if you find any bugs", inline=True)
     embed.add_field(name="$clear", value="Clear messages", inline=True)
     embed.add_field(name="$kick", value="Kick", inline=True)
     embed.add_field(name="$ban", value="Ban", inline=True)
