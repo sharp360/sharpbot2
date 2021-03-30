@@ -15,7 +15,6 @@ ffmpeg
 PyNaCl
 urbandictionary
 spotdl
-youtube_dl
 colour
 discord.webhooks
 psutil
