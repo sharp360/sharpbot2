@@ -3,12 +3,12 @@ websockets
 asyncio
 beautifulsoup4
 asyncpg
-requests==2.21.0
-dhooks
-aiohttp
+requests==2.20.1
+dhooks==1.0.9
+aiohttp<3.5.0,>=3.3.0
 git+https://github.com/Rapptz/discord.py
 psutil
-yarl
+yarl<1.3
 art
 lxml
 ffmpeg
@@ -16,9 +16,3 @@ PyNaCl
 urbandictionary
 spotdl
 youtube_dl
-colour
-discord.webhooks
-psutil
-lxml
-PythonGists
-pytz
